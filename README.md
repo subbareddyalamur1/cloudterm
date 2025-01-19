@@ -65,7 +65,7 @@ docker-compose up --build -d
 ```
 
 5. Access the application:
-Open your browser and navigate to `http://localhost:5000`
+Open your browser and navigate to `http://localhost:8080`
 
 ## Configuration
 
