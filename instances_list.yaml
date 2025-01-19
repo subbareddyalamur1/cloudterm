@@ -1,0 +1,83 @@
+csl:
+  region: eu-central-1
+  aws_profile: prod
+  instances:
+    dev:
+      - name: csl-dev-cdr-42
+        instance_id: i-09b8735ca10bb226b
+      - name: csl-dev-sftp-42
+        instance_id: i-0a5afefe6194f3e4a
+      - name: csl-dev-guac
+        instance_id: i-0393eeef716bd26d5
+      - name: csl-dev-cdr-35
+        instance_id: i-0110ec7f7bd1280a7
+      - name: csl-dev-sftp-35
+        instance_id: i-0a5afefe6194f3e4a
+    val:
+      - name: csl-val-cdr-42
+        instance_id: i-03f1226191b9b0e1b
+      - name: csl-val-sftp-42
+        instance_id: i-089b6f144f71c9269
+      - name: csl-val-guac
+        instance_id: i-07be44b50e9e01267
+      - name: csl-val-cdr-35
+        instance_id: i-05c23c88a341d9c0b
+      - name: csl-val-sftp-35
+        instance_id: i-065211051228e5f33
+    prod:
+      - name: csl-prod-cdr-42
+        instance_id: i-04333f5d71e64b257
+      - name: csl-prod-sftp-42
+        instance_id: i-0e90272483cc0900c
+      - name: csl-prod-guac
+        instance_id: i-09dcf48e7e552894c
+      - name: csl-prod-cdr-35
+        instance_id: i-06217e340ba72b7ff
+      - name: csl-prod-sftp-35
+        instance_id: i-0a81c8263568cc26d
+genmab:
+  region: eu-central-1
+  aws_profile: prod
+  instances:
+    dev:
+      - name: genmab-dev-cdr
+        instance_id: i-0434a86cb6e9935c2
+      - name: genmab-dev-sftp
+        instance_id: i-03e52741f7935e478
+      - name: genmab-dev-guac
+        instance_id: i-0565c130023c84dd8
+      - name: genmab-dev-sas-linux
+        instance_id: i-03cf3050f5ce1cd92
+      - name: genmab-dev-rshiny
+        instance_id: i-009b4de7be14532e3
+    val:
+      - name: genmab-val-cdr
+        instance_id: i-0893e061bead882cc
+      - name: genmab-val-sftp
+        instance_id: i-0c12b8d71f6ae3f96
+      - name: genmab-val-guac
+        instance_id: i-0baded51c5ac08aa6
+      - name: genmab-val-sas-linux
+        instance_id: i-0014c689df7e4c59e
+      - name: genmab-val-rshiny
+        instance_id: i-01b0f948855a5b804
+    prod:
+      - name: genmab-prod-cdr
+        instance_id: i-0ae860ac8b6b916d1
+      - name: genmab-prod-sftp
+        instance_id: i-0f619a92d788a0b0e
+      - name: genmab-prod-guac
+        instance_id: i-032de174e91073155
+      - name: genmab-prod-sas-linux
+        instance_id: i-0eea315b4962677a4
+      - name: genmab-prod-rshiny
+        instance_id: i-0603a5d391f9ab9d2
+syc12:
+  region: us-east-1
+  aws_profile: dev
+  instances:
+    syc12:
+      - name: guacamole-a
+        instance_id: i-086eaf6cf8daa539b
+      - name: guacamole-b
+        instance_id: i-0e6237eae8e0a50cb
