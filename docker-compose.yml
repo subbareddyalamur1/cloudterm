@@ -1,5 +1,6 @@
 services:
-  web:
+  cloudterm:
+    container_name: cloudterm
     build: .
     ports:
       - "8080:5000"
