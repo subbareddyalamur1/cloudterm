@@ -15,6 +15,7 @@ from flask_socketio import SocketIO, emit
 import yaml
 import boto3
 import botocore.exceptions
+from collections import defaultdict
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -267,6 +268,259 @@ def get_instances():
     except Exception as e:
         print(f"Error loading instances: {str(e)}")
         return jsonify([])
+
+@app.route('/scan-instances')
+def scan_instances():
+    """
+    Scan AWS EC2 instances and organize them by TAG1 (root) and TAG2 (branch)
+    """
+    try:
+        # Get environment variables for tag names
+        tag1_name = os.environ.get('TAG1', 'Customer')  # Default to 'Customer' if not set
+        tag2_name = os.environ.get('TAG2', 'Environment')  # Default to 'Environment' if not set
+        
+        print(f"Scanning instances with TAG1={tag1_name}, TAG2={tag2_name}")
+        
+        # Get all AWS profiles and regions from the YAML file
+        profiles_regions = get_aws_profiles_and_regions()
+        
+        all_instances = []
+        
+        # Scan instances from all configured AWS profiles and regions
+        for profile, region in profiles_regions:
+            try:
+                instances = fetch_ec2_instances(profile, region, tag1_name, tag2_name)
+                all_instances.extend(instances)
+                print(f"Found {len(instances)} instances in profile {profile}, region {region}")
+            except Exception as e:
+                print(f"Error scanning profile {profile}, region {region}: {str(e)}")
+                continue
+        
+        # Organize instances by TAG1 and TAG2
+        tree = organize_instances_by_tags(all_instances, tag1_name, tag2_name)
+        
+        return jsonify(tree)
+    except Exception as e:
+        print(f"Error scanning instances: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+def get_aws_profiles_and_regions():
+    """
+    Extract AWS profiles and regions from the instances_list.yaml file
+    """
+    profiles_regions = set()
+    try:
+        with open('instances_list.yaml', 'r') as file:
+            data = yaml.safe_load(file)
+        
+        for customer_data in data.values():
+            if isinstance(customer_data, dict):
+                profile = customer_data.get('aws_profile')
+                region = customer_data.get('region')
+                if profile and region:
+                    profiles_regions.add((profile, region))
+    except Exception as e:
+        print(f"Error reading instances_list.yaml: {str(e)}")
+        # Fallback to default
+        profiles_regions.add(('default', 'us-east-1'))
+    
+    return list(profiles_regions)
+
+def fetch_ec2_instances(aws_profile, aws_region, tag1_name, tag2_name):
+    """
+    Fetch EC2 instances from AWS with their tags and metadata
+    """
+    try:
+        # Create boto3 session with the specified profile
+        session = boto3.Session(profile_name=aws_profile, region_name=aws_region)
+        ec2 = session.client('ec2')
+        sts = session.client('sts')
+        
+        # Get AWS Account ID
+        account_info = sts.get_caller_identity()
+        account_id = account_info['Account']
+        
+        # Describe all instances
+        response = ec2.describe_instances()
+        
+        instances = []
+        
+        for reservation in response['Reservations']:
+            for instance in reservation['Instances']:
+                # Extract tags
+                tags = {tag['Key']: tag['Value'] for tag in instance.get('Tags', [])}
+                
+                # Get instance metadata
+                instance_data = {
+                    'instance_id': instance['InstanceId'],
+                    'name': tags.get('Name', instance['InstanceId']),
+                    'state': instance['State']['Name'],
+                    'platform': instance.get('Platform', 'linux'),  # 'windows' or defaults to 'linux'
+                    'instance_type': instance['InstanceType'],
+                    'aws_profile': aws_profile,
+                    'region': aws_region,
+                    'account_id': account_id,
+                    'tags': tags,
+                    tag1_name.lower(): tags.get(tag1_name, 'Unknown'),
+                    tag2_name.lower(): tags.get(tag2_name, 'Unknown')
+                }
+                
+                instances.append(instance_data)
+        
+        return instances
+    except Exception as e:
+        print(f"Error fetching instances from {aws_profile}/{aws_region}: {str(e)}")
+        return []
+
+def organize_instances_by_tags(instances, tag1_name, tag2_name):
+    """
+    Organize instances into a tree structure based on AWS Account ID, Region, then TAG1 and TAG2
+    """
+    # Group instances by Account ID first, then Region, then TAG1, then TAG2
+    account_groups = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list))))
+    
+    for instance in instances:
+        account_id = instance.get('account_id', 'Unknown')
+        region = instance.get('region', 'Unknown')
+        tag1_value = instance.get(tag1_name.lower(), 'Unknown')
+        tag2_value = instance.get(tag2_name.lower(), 'Unknown')
+        account_groups[account_id][region][tag1_value][tag2_value].append(instance)
+    
+    # Build tree structure
+    tree = []
+    
+    for account_id, region_groups in account_groups.items():
+        # Create account-level node
+        account_node = {
+            'name': f'AWS Account: {account_id}',
+            'type': 'account',
+            'regions': []
+        }
+        
+        for region, tag1_groups in region_groups.items():
+            # Create region-level node
+            region_node = {
+                'name': f'Region: {region}',
+                'type': 'region',
+                'customers': []
+            }
+            
+            for tag1_value, tag2_groups in tag1_groups.items():
+                tag1_node = {
+                    'name': tag1_value,
+                    'type': 'customer',
+                    'environments': []
+                }
+                
+                for tag2_value, instances_list in tag2_groups.items():
+                    tag2_node = {
+                        'name': tag2_value,
+                        'type': 'environment',
+                        'instances': []
+                    }
+                    
+                    for instance in instances_list:
+                        instance_node = {
+                            'name': instance['name'],
+                            'id': instance['instance_id'],
+                            'type': 'instance',
+                            'state': instance['state'],
+                            'platform': instance['platform'],
+                            'instance_type': instance['instance_type'],
+                            'aws_profile': instance['aws_profile'],
+                            'region': instance['region'],
+                            'account_id': instance['account_id']
+                        }
+                        tag2_node['instances'].append(instance_node)
+                    
+                    tag1_node['environments'].append(tag2_node)
+                
+                region_node['customers'].append(tag1_node)
+            
+            account_node['regions'].append(region_node)
+        
+        tree.append(account_node)
+    
+    return tree
+
+@app.route('/save-scanned-instances', methods=['POST'])
+def save_scanned_instances():
+    """
+    Save scanned instances to the instances_list.yaml file
+    """
+    try:
+        # Get environment variables for tag names
+        tag1_name = os.environ.get('TAG1', 'Customer')
+        tag2_name = os.environ.get('TAG2', 'Environment')
+        
+        # Get all AWS profiles and regions from the YAML file
+        profiles_regions = get_aws_profiles_and_regions()
+        
+        all_instances = []
+        
+        # Scan instances from all configured AWS profiles and regions
+        for profile, region in profiles_regions:
+            try:
+                instances = fetch_ec2_instances(profile, region, tag1_name, tag2_name)
+                all_instances.extend(instances)
+            except Exception as e:
+                print(f"Error scanning profile {profile}, region {region}: {str(e)}")
+                continue
+        
+        # Convert to YAML format
+        yaml_data = convert_instances_to_yaml_format(all_instances, tag1_name, tag2_name)
+        
+        # Save to file
+        with open('instances_list.yaml', 'w') as file:
+            yaml.dump(yaml_data, file, default_flow_style=False, sort_keys=False)
+        
+        return jsonify({'success': True, 'message': 'Instances saved successfully'})
+    except Exception as e:
+        print(f"Error saving instances: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+def convert_instances_to_yaml_format(instances, tag1_name, tag2_name):
+    """
+    Convert scanned instances to the YAML format expected by the application
+    Note: YAML format doesn't support account segregation, so we'll group by TAG1 and TAG2
+    but add account info as comments
+    """
+    yaml_data = {}
+    
+    # Group instances by TAG1 and TAG2 (ignoring account for YAML compatibility)
+    tag1_groups = defaultdict(lambda: defaultdict(list))
+    
+    for instance in instances:
+        tag1_value = instance.get(tag1_name.lower(), 'Unknown')
+        tag2_value = instance.get(tag2_name.lower(), 'Unknown')
+        tag1_groups[tag1_value][tag2_value].append(instance)
+    
+    # Convert to YAML structure
+    for tag1_value, tag2_groups in tag1_groups.items():
+        # Use the first instance to get AWS profile and region for this group
+        first_instance = next(iter(next(iter(tag2_groups.values()))))
+        
+        # Create a unique key that includes account info if multiple accounts exist
+        account_id = first_instance.get('account_id', 'Unknown')
+        yaml_key = f"{tag1_value}_{account_id}" if len(set(inst.get('account_id') for inst in instances)) > 1 else tag1_value
+        
+        yaml_data[yaml_key] = {
+            'region': first_instance['region'],
+            'aws_profile': first_instance['aws_profile'],
+            'account_id': account_id,  # Add account ID to YAML
+            'instances': {}
+        }
+        
+        for tag2_value, instances_list in tag2_groups.items():
+            yaml_data[yaml_key]['instances'][tag2_value] = []
+            
+            for instance in instances_list:
+                yaml_data[yaml_key]['instances'][tag2_value].append({
+                    'name': instance['name'],
+                    'instance_id': instance['instance_id']
+                })
+    
+    return yaml_data
 
 @socketio.on('connect')
 def handle_connect():
