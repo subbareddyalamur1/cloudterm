@@ -49,22 +49,27 @@ CloudTerm provides secure access to AWS EC2 instances through AWS Systems Manage
         🖥️ 🟢 EU Web Server (i-5555666677778888)
 ```
 
-## 🚀 Quick Start
+## 🚀 Deployment Guide
 
-### Prerequisites
-- Docker & Docker Compose
+Choose your preferred deployment method based on your environment and requirements:
+
+### 📋 Prerequisites
 - AWS Account with EC2 and Session Manager permissions
 - AWS credentials configured
+- Python 3.11+ (for manual deployment)
+- Docker (for containerized deployment)
 
-### 1. Clone Repository
+### 🔧 Initial Setup
+
+#### 1. Clone Repository
 ```bash
 git clone https://github.com/subbareddyalamur1/cloudterm.git
 cd cloudterm
 ```
 
-### 2. Configure AWS Credentials
+#### 2. Configure AWS Credentials
 ```bash
-# Create AWS credentials file
+# Create AWS credentials directory
 mkdir -p ~/.aws
 
 # Add to ~/.aws/credentials
@@ -86,9 +91,9 @@ region = us-west-2
 output = json
 ```
 
-### 3. Configure Tag-Based Organization
+#### 3. Configure Tag-Based Organization
 ```bash
-# Set environment variables for tag-based grouping
+# Set environment variables for instance grouping
 export TAG1="Customer"     # Root level tag (e.g., Customer, Project, Team)
 export TAG2="Environment"  # Branch level tag (e.g., Environment, Stage)
 
@@ -96,15 +101,174 @@ export TAG2="Environment"  # Branch level tag (e.g., Environment, Stage)
 ./run_with_tags.sh
 ```
 
-### 4. Launch Application
+---
+
+## 🎯 Phase 1: Manual Python Deployment
+
+**Best for**: Development, testing, and local debugging
+
+### Step 1: Setup Python Environment
 ```bash
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Upgrade pip and install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### Step 2: Install AWS Session Manager Plugin
+```bash
+# macOS
+brew install --cask session-manager-plugin
+
+# Ubuntu/Debian
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+sudo dpkg -i session-manager-plugin.deb
+
+# Windows
+# Download and install from: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
+```
+
+### Step 3: Run Application
+```bash
+# Set environment variables
+export TAG1="Customer"
+export TAG2="Environment"
+export PORT=5000
+
+# Start the application
+python3 app.py
+```
+
+### Step 4: Access Application
+Open your browser: **http://localhost:5000**
+
+---
+
+## 🐳 Phase 2: Docker Container Deployment
+
+**Best for**: Isolated environments, testing, and single-container deployments
+
+### Step 1: Build Docker Image
+```bash
+# Build the CloudTerm image
+docker build -t cloudterm:latest .
+
+# Verify the image
+docker images | grep cloudterm
+```
+
+### Step 2: Run Container
+```bash
+# Run with default configuration
+docker run -d \
+  --name cloudterm-app \
+  -p 5000:5000 \
+  -v ~/.aws:/home/appuser/.aws:ro \
+  -v $(pwd)/instances_list.yaml:/app/instances_list.yaml:rw \
+  -e TAG1="Customer" \
+  -e TAG2="Environment" \
+  -e AWS_DEFAULT_REGION="us-east-1" \
+  cloudterm:latest
+
+# Check container status
+docker ps
+docker logs cloudterm-app
+```
+
+### Step 3: Access Application
+Open your browser: **http://localhost:5000**
+
+### Step 4: Container Management
+```bash
+# Stop the container
+docker stop cloudterm-app
+
+# Start the container
+docker start cloudterm-app
+
+# Remove the container
+docker rm cloudterm-app
+
+# View logs
+docker logs -f cloudterm-app
+```
+---
+
+## 🔧 Phase 3: Docker Compose Deployment
+
+**Best for**: Production, automated deployments, and persistent services
+
+### Step 1: Update docker-compose.yml
+```bash
+# Update the docker-compose.yml file with TAG1 and TAG2 values
+  ...
+  environment:
+    - TAG1="Customer"
+    - TAG2="Environment"
+  ...
+```
+
+### Step 2: Deploy with Docker Compose
+```bash
+# Build and start services
+docker-compose up --build -d
+
+# Check service status
+docker-compose ps
+docker-compose logs -f
+```
+
+### Step 3: Access Application
+Open your browser: **http://localhost:5000**
+
+### Step 3: Service Management
+```bash
+# View logs
+docker-compose logs -f cloudterm
+
+# Restart services
+docker-compose restart
+
+# Stop services
+docker-compose down
+
+# Stop and remove volumes
+docker-compose down -v
+
+# Update and redeploy
+docker-compose pull
 docker-compose up --build -d
 ```
 
-### 5. Access CloudTerm
-Open your browser: **http://localhost:5000**
+### Step 4: Health Monitoring
+```bash
+# Check health status
+docker-compose ps
 
-🎉 **That's it!** CloudTerm automatically scans your AWS accounts and displays instances in an organized hierarchy.
+# View detailed container info
+docker inspect cloudterm-app
+
+# Monitor resource usage
+docker stats cloudterm-app
+```
+---
+
+## 🎉 Success!
+
+Regardless of your chosen deployment method, CloudTerm will:
+
+1. **🔄 Auto-scan** your AWS accounts on startup
+2. **🏗️ Organize** instances in a 4-level hierarchy
+3. **🔍 Enable** smart search across all levels
+4. **🖥️ Provide** secure terminal access via Session Manager
+
+**Next Steps:**
+- Tag your EC2 instances with `TAG1` and `TAG2` values
+- Use the search functionality to find instances quickly
+- Connect to instances securely through the web interface
 
 ## ⚙️ Configuration
 
@@ -148,26 +312,6 @@ Powerful search functionality across all hierarchy levels:
 - **Multi-level search** across all organization levels
 
 ## 🛠️ Advanced Usage
-
-### Manual Instance Management
-
-For environments where auto-scanning isn't suitable, you can still use static configuration:
-
-```yaml
-# instances_list.yaml
-acme_corp:
-  region: us-east-1
-  aws_profile: prod
-  instances:
-    production:
-      - name: Web Server 1
-        instance_id: i-1234567890abcdef0
-      - name: Database Server
-        instance_id: i-0987654321fedcba0
-    development:
-      - name: Dev Server
-        instance_id: i-1111222233334444
-```
 
 ### Custom Tag Configuration
 
@@ -308,4 +452,4 @@ MIT License - see LICENSE file for details.
 
 ---
 
-**Made with ❤️ for AWS infrastructure management**
+

@@ -74,6 +74,7 @@ COPY --chown=appuser:appuser app.py ./
 COPY --chown=appuser:appuser instances_list.yaml ./
 COPY --chown=appuser:appuser run_with_tags.sh ./
 COPY --chown=appuser:appuser templates/ ./templates/
+COPY --chown=appuser:appuser static/ ./static/
 
 # Make scripts executable
 RUN chmod +x run_with_tags.sh
