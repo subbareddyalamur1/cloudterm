@@ -103,7 +103,7 @@ export TAG2="Environment"  # Branch level tag (e.g., Environment, Stage)
 
 ---
 
-## 🎯 Phase 1: Manual Python Deployment
+## 🎯 Option 1: Manual Python Deployment
 
 **Best for**: Development, testing, and local debugging
 
@@ -147,7 +147,7 @@ Open your browser: **http://localhost:5000**
 
 ---
 
-## 🐳 Phase 2: Docker Container Deployment
+## 🐳 Option 2: Docker Container Deployment
 
 **Best for**: Isolated environments, testing, and single-container deployments
 
@@ -197,7 +197,7 @@ docker logs -f cloudterm-app
 ```
 ---
 
-## 🔧 Phase 3: Docker Compose Deployment
+## 🔧 Option 3: Docker Compose Deployment
 
 **Best for**: Production, automated deployments, and persistent services
 
