@@ -7,20 +7,31 @@ CloudTerm provides secure access to AWS EC2 instances through AWS Systems Manage
 <img width="2594" height="1577" alt="image" src="https://github.com/user-attachments/assets/18d50bda-9174-460f-a289-e2a01b630b65" />
 
 
-
 ## ✨ Key Features
 
-### 🔄 **Automatic Instance Discovery**
-- **Zero Configuration**: Automatically scans AWS accounts on startup
-- **4-Level Hierarchy**: Account → Region → Customer → Environment
-- **Multi-Account Support**: Seamlessly handles multiple AWS accounts
-- **Real-Time Status**: Live instance state indicators
+- **🔍 Dynamic Discovery**: Automatically scans AWS EC2 instances across multiple profiles and regions
+- **💾 Smart Caching**: Save discovered instances to YAML for fast terminal connections
+- **🏗️ 4-Level Hierarchy**: Organizes instances by AWS Account → Region → Customer (TAG1) → Environment (TAG2)
+- **🔐 Secure Access**: Uses AWS Systems Manager Session Manager for keyless, secure terminal connections
+- **🔍 Real-time Search**: Filter instances by name, ID, tags, or any metadata with auto-expansion
+- **📊 Visual Indicators**: Color-coded instance states (running, stopped, transitioning) and platform icons
+- **🐳 Container Ready**: Fully containerized with Docker and Docker Compose support
+- **⚡ One-Click Workflow**: Scan automatically discovers and saves instances
 
-### 🎯 **Smart Organization**
-- **Tag-Based Grouping**: Uses custom AWS tags (TAG1/TAG2) for organization
-- **Visual Indicators**: Color-coded status dots (🟢 Running, 🔴 Stopped, 🟡 Transitioning)
-- **Platform Detection**: Automatic Linux 🐧 / Windows 🪟 icons
-- **Intelligent Search**: Search across all hierarchy levels
+## 🔄 How It Works
+
+### **Step 1: Scan & Auto-Save** 🔍💾
+- Click "Scan Instances" or wait for auto-scan on page load
+- Automatically discovers EC2 instances across all AWS profiles and regions
+- Organizes instances in a 4-level hierarchy (Account → Region → Customer → Environment)
+- **Automatically saves** discovered instances to `instances_list.yaml` for terminal connections
+- Shows real-time instance status and metadata
+
+### **Step 2: Connect** 🔗
+- Click any instance to open a secure terminal session
+- Uses AWS Systems Manager Session Manager
+- No SSH keys or open ports required
+- Instance connection details are automatically available from the saved configuration
 
 ### 🔐 **Security & Reliability**
 - **AWS Session Manager**: Secure connections without open ports

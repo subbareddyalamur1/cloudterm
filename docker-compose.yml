@@ -28,11 +28,7 @@ services:
       # Auto-scan configuration
       - TAG1=Customer                 # Root level AWS tag for grouping
       - TAG2=Environment              # Branch level AWS tag for grouping
-      
-      # AWS configuration
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
-      - AWS_PROFILE=${AWS_PROFILE:-default}
-    
+ 
     # Resource limits for production use
     deploy:
       resources:

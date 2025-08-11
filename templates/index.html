@@ -5,6 +5,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'><path fill='%234d9fff' d='M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM300 376c0 4.4-3.6 8-8 8h-84c-4.4 0-8-3.6-8-8v-32c0-4.4 3.6-8 8-8h84c4.4 0 8 3.6 8 8v32zm0-96c0 4.4-3.6 8-8 8h-84c-4.4 0-8-3.6-8-8v-32c0-4.4 3.6-8 8-8h84c4.4 0 8 3.6 8 8v32zm128 96c0 4.4-3.6 8-8 8h-84c-4.4 0-8-3.6-8-8v-32c0-4.4 3.6-8 8-8h84c4.4 0 8 3.6 8 8v32z'/></svg>">
     <link rel="stylesheet" href="{{ url_for('static', filename='xterm/css/xterm.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <style>
         body {
             margin: 0;
@@ -143,6 +144,22 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: #21262d;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #238636, #2ea043);
+            border-radius: 4px;
+            transition: width 0.3s ease-in-out;
         }
         .resizer {
             width: 8px;
@@ -350,11 +367,7 @@
             <div class="button-group">
                 <button id="scan-button" class="scan-button">
                     <i class="fas fa-sync-alt"></i>
-                    <span>Scan</span>
-                </button>
-                <button id="save-button" class="scan-button" style="background: linear-gradient(135deg, #0969da, #0550ae);" disabled>
-                    <i class="fas fa-save"></i>
-                    <span>Save</span>
+                    <span>Scan Instances</span>
                 </button>
             </div>
             <div class="search-container">
@@ -646,7 +659,20 @@
         function autoScanInstances() {
             console.log('Auto-scanning instances on page load...');
             const treeContainer = document.getElementById('instances-tree');
-            treeContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: #8b949e;"><i class="fas fa-sync-alt fa-spin"></i> Scanning instances...</div>';
+            treeContainer.innerHTML = `
+                <div id="scan-status-container" style="padding: 20px; color: #8b949e;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <i class="fas fa-sync-alt fa-spin"></i> Scanning AWS instances...
+                    </div>
+                    <div id="scan-progress" style="margin-bottom: 10px;">
+                        <div>Profiles: <span id="scan-profiles">0</span></div>
+                        <div>Regions: <span id="scan-regions">0</span></div>
+                        <div>Progress: <span id="scan-progress-count">0</span>/<span id="scan-total-count">0</span></div>
+                        <div>Instances found: <span id="scan-instances-count">0</span></div>
+                    </div>
+                    <div id="scan-results" style="max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px;"></div>
+                </div>
+            `;
             
             fetch('/scan-instances')
                 .then(response => response.json())
@@ -656,9 +682,7 @@
                         throw new Error(data.error);
                     }
                     renderInstanceTree(data);
-                    // Enable save button after successful scan
-                    document.getElementById('save-button').disabled = false;
-                    window.lastScannedData = data; // Store for saving
+
                 })
                 .catch(error => {
                     console.error('Error auto-scanning instances:', error);
@@ -686,13 +710,11 @@
         // Function to scan instances from AWS
         function scanInstances() {
             const scanButton = document.getElementById('scan-button');
-            const saveButton = document.getElementById('save-button');
             const buttonText = scanButton.querySelector('span');
             const buttonIcon = scanButton.querySelector('i');
             
-            // Disable buttons and show loading state
+            // Disable button and show loading state
             scanButton.disabled = true;
-            saveButton.disabled = true;
             buttonIcon.className = 'spinner';
             buttonText.textContent = 'Scanning...';
             
@@ -704,9 +726,7 @@
                         throw new Error(data.error);
                     }
                     renderInstanceTree(data);
-                    // Enable save button after successful scan
-                    saveButton.disabled = false;
-                    window.lastScannedData = data; // Store for saving
+
                 })
                 .catch(error => {
                     console.error('Error scanning instances:', error);
@@ -721,48 +741,7 @@
                 });
         }
         
-        // Function to save scanned instances to YAML
-        function saveInstances() {
-            const saveButton = document.getElementById('save-button');
-            const buttonText = saveButton.querySelector('span');
-            const buttonIcon = saveButton.querySelector('i');
-            
-            // Disable button and show loading state
-            saveButton.disabled = true;
-            buttonIcon.className = 'spinner';
-            buttonText.textContent = 'Saving...';
-            
-            fetch('/save-scanned-instances', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        throw new Error(data.error);
-                    }
-                    console.log('Instances saved successfully');
-                    // Show success message briefly
-                    buttonText.textContent = 'Saved!';
-                    setTimeout(() => {
-                        buttonText.textContent = 'Save';
-                    }, 2000);
-                })
-                .catch(error => {
-                    console.error('Error saving instances:', error);
-                    buttonText.textContent = 'Error!';
-                    setTimeout(() => {
-                        buttonText.textContent = 'Save';
-                    }, 2000);
-                })
-                .finally(() => {
-                    // Re-enable button
-                    buttonIcon.className = 'fas fa-save';
-                    saveButton.disabled = false;
-                });
-        }
+
         
         // Store the current data for filtering
         let currentInstanceData = [];
@@ -885,12 +864,122 @@
         
         // Add event listeners for buttons
         document.getElementById('scan-button').addEventListener('click', scanInstances);
-        document.getElementById('save-button').addEventListener('click', saveInstances);
         
         // Add search functionality
         document.getElementById('search-input').addEventListener('input', function(e) {
             const searchTerm = e.target.value;
             renderInstanceTree(currentInstanceData, searchTerm);
+        });
+        
+        // Socket.IO connection and event handling for scan status updates
+        const socket = io();
+        
+        socket.on('scan_status', function(data) {
+            console.log('Received scan status update:', data);
+            
+            // Update progress bar and counts
+            const progressContainer = document.getElementById('scan-progress');
+            if (progressContainer) {
+                const progressPercent = (data.scanned_combinations / data.total_combinations) * 100;
+                progressContainer.innerHTML = `
+                    <div>Progress: ${data.scanned_combinations} of ${data.total_combinations} profile-region combinations scanned (${progressPercent.toFixed(0)}%)</div>
+                    <div>Profiles: ${data.total_profiles} | Regions: ${data.total_regions} | Instances found: ${data.total_instances}</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${progressPercent}%"></div>
+                    </div>
+                `;
+            }
+            
+            // Update detailed results
+            const resultsContainer = document.getElementById('scan-results');
+            if (resultsContainer) {
+                // Group results by profile
+                const profileResults = {};
+                
+                data.results.forEach(result => {
+                    if (!profileResults[result.profile]) {
+                        profileResults[result.profile] = [];
+                    }
+                    profileResults[result.profile].push(result);
+                });
+                
+                // Clear previous results
+                resultsContainer.innerHTML = '';
+                
+                // Create profile sections with results
+                for (const profile in profileResults) {
+                    const results = profileResults[profile];
+                    
+                    // Create profile header
+                    const profileHeader = document.createElement('div');
+                    profileHeader.style.marginBottom = '5px';
+                    profileHeader.textContent = `Profile: ${profile}`;
+                    resultsContainer.appendChild(profileHeader);
+                    
+                    // Create results table
+                    results.forEach(result => {
+                        const row = document.createElement('div');
+                        row.style.display = 'flex';
+                        row.style.marginBottom = '2px';
+                        
+                        // Status icon
+                        const statusIcon = document.createElement('span');
+                        statusIcon.style.marginRight = '5px';
+                        statusIcon.style.width = '15px';
+                        
+                        // Region name
+                        const regionName = document.createElement('span');
+                        regionName.style.flex = '1';
+                        regionName.textContent = result.region;
+                        
+                        // Status/count
+                        const statusText = document.createElement('span');
+                        statusText.style.marginLeft = '10px';
+                        
+                        // Set status-specific styles and content
+                        switch(result.status) {
+                            case 'scanning':
+                                statusIcon.innerHTML = '🔄';
+                                statusText.textContent = 'Scanning...';
+                                break;
+                            case 'success':
+                                statusIcon.innerHTML = '✅';
+                                statusText.textContent = `${result.instance_count} instances`;
+                                statusText.style.color = '#4caf50';
+                                break;
+                            case 'empty':
+                                statusIcon.innerHTML = '⚪';
+                                statusText.textContent = 'No instances';
+                                statusText.style.color = '#9e9e9e';
+                                break;
+                            case 'access_denied':
+                                statusIcon.innerHTML = '🔒';
+                                statusText.textContent = 'Access denied';
+                                statusText.style.color = '#ff9800';
+                                break;
+                            case 'error':
+                                statusIcon.innerHTML = '❌';
+                                statusText.textContent = 'Error';
+                                statusText.style.color = '#f44336';
+                                break;
+                        }
+                        
+                        row.appendChild(statusIcon);
+                        row.appendChild(regionName);
+                        row.appendChild(statusText);
+                        resultsContainer.appendChild(row);
+                    });
+                }
+            }
+            
+            // Update final status when scan completes
+            if (data.status === 'completed') {
+                const statusContainer = document.querySelector('#scan-status-container > div:first-child');
+                statusContainer.innerHTML = '<i class="fas fa-check-circle"></i> Scan completed';
+            } else if (data.status === 'error') {
+                const statusContainer = document.querySelector('#scan-status-container > div:first-child');
+                statusContainer.innerHTML = '<i class="fas fa-exclamation-circle"></i> Scan error: ' + data.error;
+            }
         });
         
         // Auto-scan instances on page load
