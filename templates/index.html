@@ -657,7 +657,73 @@
 
         // Function to auto-scan instances on page load
         function autoScanInstances() {
-            console.log('Auto-scanning instances on page load...');
+            console.log('Checking for cached scan results...');
+            const treeContainer = document.getElementById('instances-tree');
+            treeContainer.innerHTML = `
+                <div id="scan-status-container" style="padding: 20px; color: #8b949e;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <i class="fas fa-sync-alt fa-spin"></i> Loading AWS instances...
+                    </div>
+                </div>
+            `;
+            
+            // First check if we have cached data
+            fetch('/scan-status')
+                .then(response => response.json())
+                .then(status => {
+                    console.log('Scan cache status:', status);
+                    
+                    if (status.has_cache) {
+                        // We have cached data, use it
+                        const cacheMinutes = Math.floor(status.cache_age / 60);
+                        console.log(`Using cached scan results from ${cacheMinutes} minutes ago`);
+                        
+                        // Show loading message with cache info
+                        const statusContainer = document.querySelector('#scan-status-container > div:first-child');
+                        statusContainer.innerHTML = `
+                            <i class="fas fa-sync-alt fa-spin"></i> Loading cached instances from ${cacheMinutes} minutes ago...
+                            <div style="margin-top: 10px; font-size: 12px;">
+                                <button id="force-scan-button" class="scan-button" style="padding: 5px 10px; font-size: 12px;">
+                                    <i class="fas fa-sync-alt"></i> Force Fresh Scan
+                                </button>
+                            </div>
+                        `;
+                        
+                        // Load cached data
+                        return fetch('/scan-instances')
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Loaded cached instances:', data);
+                                if (data.error) {
+                                    throw new Error(data.error);
+                                }
+                                renderInstanceTree(data);
+                                
+                                // Add event listener to force scan button
+                                document.getElementById('force-scan-button').addEventListener('click', forceScan);
+                            });
+                    } else {
+                        // No cache, perform a fresh scan
+                        return performFreshScan();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking scan cache:', error);
+                    // Fallback to static instances if scan fails
+                    console.log('Falling back to static instances...');
+                    loadStaticInstancesAsFallback();
+                });
+        }
+        
+        // Function to force a fresh scan
+        function forceScan() {
+            console.log('Forcing fresh scan...');
+            performFreshScan();
+        }
+        
+        // Function to perform a fresh scan
+        function performFreshScan() {
+            console.log('Performing fresh scan...');
             const treeContainer = document.getElementById('instances-tree');
             treeContainer.innerHTML = `
                 <div id="scan-status-container" style="padding: 20px; color: #8b949e;">
@@ -674,18 +740,17 @@
                 </div>
             `;
             
-            fetch('/scan-instances')
+            return fetch('/scan-instances?force=true')
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Auto-scanned instances:', data);
+                    console.log('Fresh scan completed:', data);
                     if (data.error) {
                         throw new Error(data.error);
                     }
                     renderInstanceTree(data);
-
                 })
                 .catch(error => {
-                    console.error('Error auto-scanning instances:', error);
+                    console.error('Error performing fresh scan:', error);
                     // Fallback to static instances if scan fails
                     console.log('Falling back to static instances...');
                     loadStaticInstancesAsFallback();
@@ -718,15 +783,11 @@
             buttonIcon.className = 'spinner';
             buttonText.textContent = 'Scanning...';
             
-            fetch('/scan-instances')
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Scanned instances:', data);
-                    if (data.error) {
-                        throw new Error(data.error);
-                    }
-                    renderInstanceTree(data);
-
+            // Always force a fresh scan when the scan button is clicked
+            console.log('Scan button clicked - performing fresh scan with progress updates...');
+            performFreshScan()
+                .then(() => {
+                    console.log('Fresh scan completed from scan button');
                 })
                 .catch(error => {
                     console.error('Error scanning instances:', error);
@@ -737,7 +798,7 @@
                     // Re-enable scan button
                     scanButton.disabled = false;
                     buttonIcon.className = 'fas fa-sync-alt';
-                    buttonText.textContent = 'Scan';
+                    buttonText.textContent = 'Scan Instances';
                 });
         }
         

@@ -10,7 +10,7 @@ import fcntl
 import threading
 import subprocess
 import pty
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from flask_socketio import SocketIO, emit
 import yaml
 import boto3
@@ -21,8 +21,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
-# Store active sessions
+# Store active sessions and cache
 sessions = {}  # Key: session_id, Value: SSMSession object
+scan_cache = {"data": None, "timestamp": 0}  # Cache for scan results
 
 class SSMSession:
     def __init__(self, instance_id, session_id):
@@ -173,24 +174,41 @@ def get_instance_config(instance_id):
     try:
         with open('instances_list.yaml', 'r') as file:
             data = yaml.safe_load(file)
-            for customer, customer_data in data.items():
-                for env_name, instances in customer_data.get('instances', {}).items():
-                    if isinstance(instances, list):  # Direct list of instances
-                        for instance in instances:
-                            if instance.get('instance_id') == instance_id:
-                                # Use instance-specific region/profile if available, otherwise fallback to customer level
-                                return {
-                                    'aws_profile': instance.get('aws_profile', customer_data.get('aws_profile')),
-                                    'region': instance.get('region', customer_data.get('region'))
-                                }
-                    else:  # Nested environment structure
-                        for instance in instances:
-                            if instance.get('instance_id') == instance_id:
-                                # Use instance-specific region/profile if available, otherwise fallback to customer level
-                                return {
-                                    'aws_profile': instance.get('aws_profile', customer_data.get('aws_profile')),
-                                    'region': instance.get('region', customer_data.get('region'))
-                                }
+            
+            # Handle the new 4-level hierarchy structure
+            for account_key, account_data in data.items():
+                if 'regions' in account_data:
+                    # New 4-level structure: Account → Region → Customer → Environment → Instances
+                    for region_name, region_data in account_data['regions'].items():
+                        if 'customers' in region_data:
+                            for customer_name, customer_data in region_data['customers'].items():
+                                if 'environments' in customer_data:
+                                    for env_name, env_data in customer_data['environments'].items():
+                                        if 'instances' in env_data:
+                                            for instance in env_data['instances']:
+                                                if instance.get('instance_id') == instance_id:
+                                                    return {
+                                                        'aws_profile': instance.get('aws_profile', account_data.get('aws_profile')),
+                                                        'region': instance.get('region', region_name)
+                                                    }
+                else:
+                    # Fallback for old 3-level structure compatibility
+                    for env_name, instances in account_data.get('instances', {}).items():
+                        if isinstance(instances, list):  # Direct list of instances
+                            for instance in instances:
+                                if instance.get('instance_id') == instance_id:
+                                    return {
+                                        'aws_profile': instance.get('aws_profile', account_data.get('aws_profile')),
+                                        'region': instance.get('region', account_data.get('region'))
+                                    }
+                        elif isinstance(instances, dict):  # Nested structure
+                            for sub_env, sub_instances in instances.items():
+                                for instance in sub_instances:
+                                    if instance.get('instance_id') == instance_id:
+                                        return {
+                                            'aws_profile': instance.get('aws_profile', account_data.get('aws_profile')),
+                                            'region': instance.get('region', account_data.get('region'))
+                                        }
         print(f"Warning: No configuration found for instance {instance_id}")
         return None
     except Exception as e:
@@ -238,33 +256,68 @@ def get_instances():
         print(f"Loaded YAML data: {data}")
         
         tree = []
-        for customer, customer_data in data.items():
-            customer_node = {
-                'name': customer,
-                'type': 'customer',
-                'environments': []
+        for account_key, account_data in data.items():
+            # Parse account name from account_key (format: AWS_Account_AccountID)
+            if account_key.startswith('AWS_Account_'):
+                account_id = account_key.replace('AWS_Account_', '')
+                account_name = f"AWS Account {account_id}"
+            else:
+                # Fallback for old format
+                account_parts = account_key.split('_')
+                if len(account_parts) >= 2:
+                    account_name = '_'.join(account_parts[:-1])
+                    account_id = account_parts[-1]
+                    account_name = f"{account_name} ({account_id})"
+                else:
+                    account_name = account_key
+            
+            account_node = {
+                'name': account_name,
+                'type': 'account',
+                'regions': []
             }
             
-            if 'instances' in customer_data:
-                environments = customer_data['instances']
-                for env_name, instances in environments.items():
-                    env_node = {
-                        'name': env_name,
-                        'type': 'environment',
-                        'instances': []
+            # Handle the new 4-level hierarchy structure
+            if 'regions' in account_data:
+                for region_name, region_data in account_data['regions'].items():
+                    region_node = {
+                        'name': region_name,
+                        'type': 'region',
+                        'customers': []
                     }
                     
-                    for instance in instances:
-                        instance_node = {
-                            'name': instance['name'],
-                            'id': instance['instance_id'],
-                            'type': 'instance'
-                        }
-                        env_node['instances'].append(instance_node)
+                    if 'customers' in region_data:
+                        for customer_name, customer_data in region_data['customers'].items():
+                            customer_node = {
+                                'name': customer_name,
+                                'type': 'customer',
+                                'environments': []
+                            }
+                            
+                            if 'environments' in customer_data:
+                                for env_name, env_data in customer_data['environments'].items():
+                                    env_node = {
+                                        'name': env_name,
+                                        'type': 'environment',
+                                        'instances': []
+                                    }
+                                    
+                                    if 'instances' in env_data:
+                                        for instance in env_data['instances']:
+                                            instance_node = {
+                                                'name': instance['name'],
+                                                'id': instance['instance_id'],
+                                                'type': 'instance'
+                                            }
+                                            env_node['instances'].append(instance_node)
+                                    
+                                    customer_node['environments'].append(env_node)
+                            
+                            region_node['customers'].append(customer_node)
                     
-                    customer_node['environments'].append(env_node)
+                    account_node['regions'].append(region_node)
             
-            tree.append(customer_node)
+            tree.append(account_node)
         
         return jsonify(tree)
     except Exception as e:
@@ -277,6 +330,19 @@ def scan_instances():
     Scan EC2 instances from all AWS profiles and regions
     """
     try:
+        global scan_cache
+        
+        # Check for force_scan parameter
+        force_scan = request.args.get('force', 'false').lower() == 'true'
+        
+        # Check if we have cached data and it's less than 30 minutes old
+        current_time = time.time()
+        cache_age = current_time - scan_cache['timestamp']
+        
+        if not force_scan and scan_cache['data'] and cache_age < 1800:  # 30 minutes cache
+            print(f"Using cached scan results from {int(cache_age)} seconds ago")
+            return jsonify(scan_cache['data'])
+        
         # Get environment variables for tag names
         tag1_name = os.environ.get('TAG1', 'Customer')
         tag2_name = os.environ.get('TAG2', 'Environment')
@@ -370,11 +436,31 @@ def scan_instances():
         else:
             print("No instances found to save")
         
+        # Update cache with new scan results
+        scan_cache['data'] = tree
+        scan_cache['timestamp'] = time.time()
+        print(f"Updated scan cache at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+        
         return jsonify(tree)
     except Exception as e:
         print(f"Error scanning instances: {str(e)}")
         socketio.emit('scan_status', {'status': 'error', 'error': str(e)})
         return jsonify({'error': str(e)}), 500
+
+@app.route('/scan-status')
+def get_scan_status():
+    """
+    Check if cached scan data is available
+    """
+    global scan_cache
+    current_time = time.time()
+    cache_age = current_time - scan_cache['timestamp'] if scan_cache['timestamp'] > 0 else float('inf')
+    
+    return jsonify({
+        'has_cache': scan_cache['data'] is not None,
+        'cache_age': int(cache_age),
+        'cache_time': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(scan_cache['timestamp'])) if scan_cache['timestamp'] > 0 else None
+    })
 
 def get_all_aws_regions():
     """
@@ -561,63 +647,69 @@ def organize_instances_by_tags(instances, tag1_name, tag2_name):
 
 def convert_instances_to_yaml_format(instances, tag1_name, tag2_name):
     """
-    Convert scanned instances to the YAML format expected by the application
-    Groups instances by customer and account, merging all regions under each customer
+    Convert scanned instances to the proper 4-level hierarchy YAML format:
+    Account → Region → Customer (TAG1) → Environment (TAG2)
     """
     yaml_data = {}
     
-    # Group instances by customer and account (not by region)
-    customer_groups = defaultdict(lambda: defaultdict(list))
+    # Group instances by account_id, region, tag1, tag2
+    account_groups = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list))))
     
     for instance in instances:
+        account_id = instance.get('account_id', 'Unknown')
+        region = instance.get('region', 'Unknown')
         tag1_value = instance.get(tag1_name.lower(), 'Unknown')
         tag2_value = instance.get(tag2_name.lower(), 'Unknown')
-        account_id = instance.get('account_id', 'Unknown')
+        aws_profile = instance.get('aws_profile', 'default')
         
-        # Group by customer and account only (merge all regions)
-        customer_key = f"{tag1_value}_{account_id}"
-        customer_groups[customer_key][tag2_value].append(instance)
+        # Group by account → region → customer → environment
+        account_groups[account_id][region][tag1_value][tag2_value].append(instance)
     
-    # Convert to YAML structure
-    for customer_key, tag2_groups in customer_groups.items():
-        # Extract customer name and account from key
-        parts = customer_key.rsplit('_', 1)
-        if len(parts) >= 2:
-            customer_name = parts[0]
-            account_id = parts[1]
-        else:
-            customer_name = customer_key
-            account_id = 'Unknown'
+    # Convert to YAML structure with proper 4-level hierarchy
+    for account_id, regions in account_groups.items():
+        # Create account key using AWS account ID (not customer name)
+        account_key = f"AWS_Account_{account_id}"
         
-        # Use the first instance to get AWS profile and determine primary region
-        first_instance = next(iter(next(iter(tag2_groups.values()))))
+        # Get AWS profile from first instance
+        first_region = next(iter(regions.values()))
+        first_customer = next(iter(first_region.values()))
+        first_env = next(iter(first_customer.values()))
+        first_instance = first_env[0]  # first_env is already a list of instances
+        aws_profile = first_instance.get('aws_profile', 'default')
         
-        # Find the most common region for this customer (for backward compatibility)
-        region_counts = defaultdict(int)
-        for instances_list in tag2_groups.values():
-            for instance in instances_list:
-                region_counts[instance['region']] += 1
-        primary_region = max(region_counts.keys(), key=region_counts.get) if region_counts else 'us-east-1'
-        
-        yaml_data[customer_key] = {
-            'region': primary_region,  # Most common region for backward compatibility
-            'aws_profile': first_instance['aws_profile'],
-            'account_id': account_id,
-            'instances': {}
+        # Create the account entry with 4-level hierarchy
+        yaml_data[account_key] = {
+            'aws_profile': aws_profile,
+            'account_id': str(account_id),
+            'regions': {}
         }
         
-        # Add all instances from all regions under each environment
-        for tag2_value, instances_list in tag2_groups.items():
-            if tag2_value not in yaml_data[customer_key]['instances']:
-                yaml_data[customer_key]['instances'][tag2_value] = []
+        # For each region in this account
+        for region, customers in regions.items():
+            yaml_data[account_key]['regions'][region] = {
+                'customers': {}
+            }
             
-            for instance in instances_list:
-                yaml_data[customer_key]['instances'][tag2_value].append({
-                    'name': instance['name'],
-                    'instance_id': instance['instance_id'],
-                    'region': instance['region'],  # Store actual region per instance
-                    'aws_profile': instance['aws_profile']  # Store profile per instance
-                })
+            # For each customer in this region
+            for customer_name, environments in customers.items():
+                yaml_data[account_key]['regions'][region]['customers'][customer_name] = {
+                    'environments': {}
+                }
+                
+                # For each environment under this customer
+                for env_name, instances_list in environments.items():
+                    yaml_data[account_key]['regions'][region]['customers'][customer_name]['environments'][env_name] = {
+                        'instances': []
+                    }
+                    
+                    # Add instances under each environment
+                    for instance in instances_list:
+                        yaml_data[account_key]['regions'][region]['customers'][customer_name]['environments'][env_name]['instances'].append({
+                            'name': instance['name'],
+                            'instance_id': instance['instance_id'],
+                            'region': instance['region'],
+                            'aws_profile': instance['aws_profile']
+                        })
     
     return yaml_data
 
