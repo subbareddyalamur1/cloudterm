@@ -307,7 +307,9 @@ def get_instances():
                                             instance_node = {
                                                 'name': instance['name'],
                                                 'id': instance['instance_id'],
-                                                'type': 'instance'
+                                                'type': 'instance',
+                                                'state': 'unknown',  # Default state for cached data
+                                                'platform': 'linux'  # Default platform for cached data
                                             }
                                             env_node['instances'].append(instance_node)
                                     
