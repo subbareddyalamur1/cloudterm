@@ -4,7 +4,8 @@
 
 CloudTerm provides secure access to AWS EC2 instances through AWS Systems Manager Session Manager with intelligent 4-level hierarchical organization.
 
-<img width="2594" height="1577" alt="image" src="https://github.com/user-attachments/assets/18d50bda-9174-460f-a289-e2a01b630b65" />
+<img width="1675" height="1387" alt="image" src="https://github.com/user-attachments/assets/ee7423c1-8362-46f9-b359-58e2c09e94b8" />
+
 
 
 ## ✨ Key Features
