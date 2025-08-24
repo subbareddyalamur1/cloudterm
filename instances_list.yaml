@@ -414,7 +414,7 @@ AWS_Account_472598590798:
                 instance_id: i-00f267ccea8293067
                 region: us-east-1
                 aws_profile: dev
-              - name: SCE-4.2.2.2-Syc-syc12-staging-sFTP
+              - name: SCE-4.2.2.2-Syc-syc12-staging-sFTP-rhel7
                 instance_id: i-09ac324ddf610b1c1
                 region: us-east-1
                 aws_profile: dev
@@ -422,7 +422,7 @@ AWS_Account_472598590798:
                 instance_id: i-03427b197e2543d83
                 region: us-east-1
                 aws_profile: dev
-              - name: SCE-4.2.2.2-Syc-syc12-staging-FSA
+              - name: SCE-4.2.2.2-Syc-syc12-staging-FSA-Old-Stopped
                 instance_id: i-09f6fc8cfd6c0d8a0
                 region: us-east-1
                 aws_profile: dev
@@ -450,7 +450,7 @@ AWS_Account_472598590798:
                 instance_id: i-0858865e770bc9368
                 region: us-east-1
                 aws_profile: dev
-              - name: SCE-4.3.2.0-Syc-syc12-staging-FSA-1
+              - name: SCE-4.3.2.0-Syc-syc12-staging-FSA-1-rhel7
                 instance_id: i-047202d53b7497e52
                 region: us-east-1
                 aws_profile: dev
@@ -478,10 +478,6 @@ AWS_Account_472598590798:
                 instance_id: i-04341eaee5c7a1628
                 region: us-east-1
                 aws_profile: dev
-              - name: syc-syc12-dev-wde-2000-windows
-                instance_id: i-0ec2fe1df3fd67bfc
-                region: us-east-1
-                aws_profile: dev
               - name: SCE-4.3.2.5-syc15-syc15-new-dev-shiny_server_1_samba-testing
                 instance_id: i-0ce715e0a30a165e6
                 region: us-east-1
@@ -492,6 +488,10 @@ AWS_Account_472598590798:
                 aws_profile: dev
               - name: SCE-5.0.1.0-Syc-springfield3-dev-R
                 instance_id: i-0bd0ddd9334f70613
+                region: us-east-1
+                aws_profile: dev
+              - name: syc-syc12-dev-wde-2000-windows
+                instance_id: i-0728cd48dd5e8a546
                 region: us-east-1
                 aws_profile: dev
               - name: SCE-5.0.1.0-Syc-springfield3-dev-WIN_DSK
@@ -506,16 +506,20 @@ AWS_Account_472598590798:
                 instance_id: i-06a3bbdd1675c87b6
                 region: us-east-1
                 aws_profile: dev
-              - name: syc-syc12-dev-wde-2000-windows
-                instance_id: i-007988c44641815bf
+              - name: Syc12-Migration-Box
+                instance_id: i-09b72b0081c10c0d7
                 region: us-east-1
                 aws_profile: dev
-        Alcon:
-          environments:
-            DEV:
-              instances:
-              - name: alcons-sas-server-m8
-                instance_id: i-09bb702decd7d095e
+              - name: SCE-4.3.2.0-Syc-syc12-STG-RHEL9-FSA
+                instance_id: i-083a12ee4e1b86fdd
+                region: us-east-1
+                aws_profile: dev
+              - name: Syc12-AWS-Managed-AD
+                instance_id: i-08faf296cd033b043
+                region: us-east-1
+                aws_profile: dev
+              - name: SCE-4.2.2.2-Syc-syc12-STG-RHEL9-sFTP
+                instance_id: i-0f4903898bfc5d183
                 region: us-east-1
                 aws_profile: dev
         Unknown:
@@ -746,7 +750,7 @@ AWS_Account_826859497240:
                 instance_id: i-0ed1d6bcede4dfa7b
                 region: eu-central-1
                 aws_profile: prod
-              - name: SCE-4.2.2.7a-WDE-DEV-GENMAB-SCE
+              - name: SCE-4.2.2.7a-gucamole-DEV-GENMAB-SCE
                 instance_id: i-0565c130023c84dd8
                 region: eu-central-1
                 aws_profile: prod
@@ -936,10 +940,6 @@ AWS_Account_826859497240:
                 instance_id: i-0dcb7ce55d2053858
                 region: eu-central-1
                 aws_profile: prod
-              - name: Syca-Bastion-host-pmi
-                instance_id: i-0387235f0b0e989f6
-                region: eu-central-1
-                aws_profile: prod
               - name: SCE-4.3.2.5-pmi-deveu-dev-SAS
                 instance_id: i-04d9a66a1c76ef58a
                 region: eu-central-1
@@ -960,6 +960,10 @@ AWS_Account_826859497240:
                 instance_id: i-0ed34774b8729c3ca
                 region: eu-central-1
                 aws_profile: prod
+              - name: PMI-DEV-MSOffice
+                instance_id: i-01518811efc9dcc02
+                region: eu-central-1
+                aws_profile: prod
             VAL:
               instances:
               - name: SCE-4.3.2.5-pmi-pmival-val-sFTP
@@ -978,10 +982,6 @@ AWS_Account_826859497240:
                 instance_id: i-0f6e85ed562c9522d
                 region: eu-central-1
                 aws_profile: prod
-              - name: valpmibastion
-                instance_id: i-09fb3bc47a4bd2c99
-                region: eu-central-1
-                aws_profile: prod
               - name: SCE-4.3.2.5-pmi-pmival-val-shiny_server
                 instance_id: i-04503ed94de642ed4
                 region: eu-central-1
@@ -994,18 +994,14 @@ AWS_Account_826859497240:
                 instance_id: i-0c70309c19dd55fec
                 region: eu-central-1
                 aws_profile: prod
-              - name: 'RHEL_PMIVAL_Bastion '
-                instance_id: i-0b3a47002ff55ad1b
-                region: eu-central-1
-                aws_profile: prod
             PROD:
               instances:
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-WIN_DSK
                 instance_id: i-095987dad3d745fac
                 region: eu-central-1
                 aws_profile: prod
-              - name: PMIPROD_RHEL_BASTION
-                instance_id: i-0ece5476713e31d9e
+              - name: SCE-4.3.2.5-pmi-pmiprod-prod-guacamole_server
+                instance_id: i-06db6eb5609851675
                 region: eu-central-1
                 aws_profile: prod
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-SAS
@@ -1026,12 +1022,6 @@ AWS_Account_826859497240:
                 aws_profile: prod
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-shiny_server
                 instance_id: i-077a34afe7f7ee969
-                region: eu-central-1
-                aws_profile: prod
-            DR:
-              instances:
-              - name: SCE-4.3.2.5-pmi-pmiprod-prod-guacamole_server
-                instance_id: i-06db6eb5609851675
                 region: eu-central-1
                 aws_profile: prod
     us-east-1:
@@ -1236,28 +1226,12 @@ AWS_Account_826859497240:
                 instance_id: i-0fafc8f6717caf43d
                 region: us-east-2
                 aws_profile: prod
-              - name: SCE-4.3.0.0-Syc-acme05-staging-FSA
-                instance_id: i-0254d4c81b5f933df
-                region: us-east-2
-                aws_profile: prod
-              - name: SCE-4.3.0.0-Syc-acme05-staging-WIN_SAS
-                instance_id: i-05f395c56c2ca906a
-                region: us-east-2
-                aws_profile: prod
               - name: SCE-4.3.0.0-Syc-acme06-staging-FSA
                 instance_id: i-01b4de2605957adc5
                 region: us-east-2
                 aws_profile: prod
               - name: SCE-4.2.2.4-Syc-acme04-staging-WIN_AD
                 instance_id: i-0770bd90b898b326f
-                region: us-east-2
-                aws_profile: prod
-              - name: SCE-4.3.0.0-Syc-acme05-staging-WIN_AD
-                instance_id: i-0013b3de856bbebda
-                region: us-east-2
-                aws_profile: prod
-              - name: SCE-4.3.0.0-Syc-acme05-staging-sFTP
-                instance_id: i-044ef667e1ebe2c9f
                 region: us-east-2
                 aws_profile: prod
               - name: SCE-4.3.0.0-Syc-acme06-staging-WIN_RDG
@@ -1284,20 +1258,12 @@ AWS_Account_826859497240:
                 instance_id: i-093850e4af18855c1
                 region: us-east-2
                 aws_profile: prod
-              - name: SCE-4.3.0.0-Syc-acme05-prodtest-guacamole_server
-                instance_id: i-0c56ca6685e591591
-                region: us-east-2
-                aws_profile: prod
               - name: SCE-4.3.0.0-Syc-acme06-staging-Meilisearch
                 instance_id: i-0a952c2f6b2db5eab
                 region: us-east-2
                 aws_profile: prod
               - name: RHEL9-Test-Box
                 instance_id: i-02c8a691ba47d5246
-                region: us-east-2
-                aws_profile: prod
-              - name: SCE-4.3.0.0-Syc-acme05-staging-R1
-                instance_id: i-0be2417f6205f3408
                 region: us-east-2
                 aws_profile: prod
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server_1
@@ -1364,6 +1330,10 @@ AWS_Account_826859497240:
                 instance_id: i-02cfb6db2658dedef
                 region: us-east-2
                 aws_profile: prod
+              - name: DSW-4.3.2.5-Syc-syc19-staging-shiny_server_1
+                instance_id: i-080a8a341c9605e2e
+                region: us-east-2
+                aws_profile: prod
               - name: SCE-4.3.2.5-Syc-syc19-staging-WIN_AD
                 instance_id: i-01dadbbbe08eb98ed
                 region: us-east-2
@@ -1374,6 +1344,32 @@ AWS_Account_826859497240:
                 aws_profile: prod
               - name: SCE-4.3.2.5-Syc-syc19-staging-FSA
                 instance_id: i-02983c53c2be90a96
+                region: us-east-2
+                aws_profile: prod
+              - name: WDE-4.3.2.5-Syc-syc19-staging-guacamole_server
+                instance_id: i-01735581af5a94082
+                region: us-east-2
+                aws_profile: prod
+              - name: DSW-4.3.2.5-Syc-syc19-staging-shiny_server_2
+                instance_id: i-0cc3ef056082c952a
+                region: us-east-2
+                aws_profile: prod
+            PERF:
+              instances:
+              - name: MDR-1.1.0.0-syca-perf1-test-client
+                instance_id: i-0681d56b84cbefa2e
+                region: us-east-2
+                aws_profile: prod
+              - name: MDR-1.1.0.0-syca-perf1-test-guacamole_server
+                instance_id: i-008fa13ad5b7bebbf
+                region: us-east-2
+                aws_profile: prod
+              - name: MDR-1.1.0.0-syca-perf2-test-client
+                instance_id: i-0e94cbc514c9925e9
+                region: us-east-2
+                aws_profile: prod
+              - name: MDR-1.1.0.0-syca-perf3-test-client
+                instance_id: i-0f7667b05a49389d5
                 region: us-east-2
                 aws_profile: prod
             DEV:
@@ -1494,6 +1490,22 @@ AWS_Account_826859497240:
                 aws_profile: prod
               - name: SCE-4.3-X-Dsi-dsidev-dev-WIN_DESK-testing-new-AMI-after-wde2.0-creation
                 instance_id: i-01b16d55e6991239e
+                region: us-east-2
+                aws_profile: prod
+              - name: SCE-4.4.0.0-ds-dev-FSA
+                instance_id: i-09dac347eb533be09
+                region: us-east-2
+                aws_profile: prod
+              - name: SCE-4.4.0.0-ds-dev-sFTP
+                instance_id: i-0d1574f11ea131aa8
+                region: us-east-2
+                aws_profile: prod
+              - name: SCE-4.4.0.0-ds-dev-Bastion
+                instance_id: i-0e49ea6dd3e547c7a
+                region: us-east-2
+                aws_profile: prod
+              - name: SCE-4.4.0.0-ds-dev-SAS
+                instance_id: i-073c4bbcdd8e59c23
                 region: us-east-2
                 aws_profile: prod
               - name: AD_Server_2019_2022_Update_testing
@@ -1762,26 +1774,6 @@ AWS_Account_826859497240:
                 aws_profile: prod
               - name: genmab-sas-sso-test
                 instance_id: i-0bdb186ea1877cb14
-                region: us-east-2
-                aws_profile: prod
-        Amgen:
-          environments:
-            DEV:
-              instances:
-              - name: MDR-1.1.0.0-syca-perf1-test-client
-                instance_id: i-0681d56b84cbefa2e
-                region: us-east-2
-                aws_profile: prod
-              - name: MDR-1.1.0.0-syca-perf1-test-guacamole_server
-                instance_id: i-008fa13ad5b7bebbf
-                region: us-east-2
-                aws_profile: prod
-              - name: MDR-1.1.0.0-syca-perf2-test-client
-                instance_id: i-0e94cbc514c9925e9
-                region: us-east-2
-                aws_profile: prod
-              - name: MDR-1.1.0.0-syca-perf3-test-client
-                instance_id: i-0f7667b05a49389d5
                 region: us-east-2
                 aws_profile: prod
         Vertex:
