@@ -12,14 +12,20 @@ AWS_Account_472598590798:
                 instance_id: i-04aef357f2ddf0629
                 region: ap-south-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: MDR-1.1.0.0-syca-perf3-test-client
                 instance_id: i-054a440be8c0debbc
                 region: ap-south-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: QA-RTM-testing-server
                 instance_id: i-0f0493f0000466db5
                 region: ap-south-1
                 aws_profile: dev
+                state: running
+                platform: windows
     eu-central-1:
       customers:
         Sycamore:
@@ -30,16 +36,22 @@ AWS_Account_472598590798:
                 instance_id: i-0f48e6e6bf8d5eebb
                 region: eu-central-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: tls13validation
                 instance_id: i-041ab36e50e43ada3
                 region: eu-central-1
                 aws_profile: dev
+                state: running
+                platform: linux
             Unknown:
               instances:
               - name: TLS-12validation
                 instance_id: i-026169f3c147e109c
                 region: eu-central-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
         Unknown:
           environments:
             Unknown:
@@ -48,6 +60,8 @@ AWS_Account_472598590798:
                 instance_id: i-0218097acfba5d1fe
                 region: eu-central-1
                 aws_profile: dev
+                state: running
+                platform: linux
     us-east-1:
       customers:
         Sycamore:
@@ -58,470 +72,702 @@ AWS_Account_472598590798:
                 instance_id: i-0d748963a65eb7a2d
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
             DEV:
               instances:
               - name: SCE-Sycamore-Staging-SAS
                 instance_id: i-0c4d8f45152368ad5
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-Sycamore-Staging-FSA
                 instance_id: i-0665cb4c197e036b4
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-3.5.test-Staging-Sycamore2-AD
                 instance_id: i-0b7faa4d9a67c54fd
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: i-079b9c0da4c534973
                 instance_id: i-079b9c0da4c534973
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: odr-prodops-staging
                 instance_id: i-06447434e245e2047
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: odr-prodops-dev
                 instance_id: i-099809e275129e49c
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: Github-Runner-Syctrap
                 instance_id: i-0d7079e4312f484cc
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: rds-ec2
                 instance_id: i-0243a1e0bcc9878c9
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: ec2-rds-1
                 instance_id: i-0d62ea0668f1f7185
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: Github-Runner-Syctrap-RHEl8
                 instance_id: i-0bfd8eb566fd663a1
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-WIN_AD
                 instance_id: i-0c5a5ced1a04dd697
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-SAS-RHEL79
                 instance_id: i-0cb3059edb957bd60
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: Test-ZFS
                 instance_id: i-02893752cd0269727
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-FSA
                 instance_id: i-00d81d435fde2bfda
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-syc-sycamore15-dev-guacamole_server
                 instance_id: i-0981818afb6a249dc
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.4-Syc-syc15-dev-shiny_server_1
                 instance_id: i-0e183cba3085afffb
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-R
                 instance_id: i-081611e19ed66679b
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-guacamole_server
                 instance_id: i-0279c812393cbf7af
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore17-staging-R
                 instance_id: i-0d02ab46efc83c08d
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore17-staging-FSA
                 instance_id: i-0e70ad120e78cedb1
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-WIN_DSK
                 instance_id: i-02baf3f40fa05b76a
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-SAS-WPS
                 instance_id: i-0d70d255c3cd7deca
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-sFTP
                 instance_id: i-08fb72cf0d81a2972
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: migrate-server
                 instance_id: i-0f4f1346ab0ac71c4
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-SAS-RHEL9
                 instance_id: i-0c43ef9294790f0a8
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-WIN_DSK
                 instance_id: i-00bdf69f6c5cd9f91
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore17-staging-sFTP
                 instance_id: i-00ea9a2e827081876
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.4-Syc-syc15-dev-shiny_server_2
                 instance_id: i-0ba7311df6a891081
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-WIN_AD
                 instance_id: i-093c6a2aedf5e2d5f
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-sFTP_old_do_not_start
                 instance_id: i-0f061f3a688359d9d
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-SAS
                 instance_id: i-0b2cd529c1946faa0
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore17-staging-WIN_AD
                 instance_id: i-0edea7d63154602b1
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore17-staging-SAS
                 instance_id: i-0c91a24c094467007
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-shiny_server_2
                 instance_id: i-0252ca4ccb49b62e0
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: ARC-Sycamore-SYC16-SYC16-DS-agent-instance
                 instance_id: i-0dc83c7af30f9e362
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: ARC-Sycamore-SYC16-SYC16-SGW-agent-instance
                 instance_id: i-0e2bc3109d38c8a29
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-syc15-syc15-new-dev-shiny_server_2
                 instance_id: i-064767a0c5e453131
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2-Syc-SYC15-RH9.4-NEW-dev-shiny_server_4
                 instance_id: i-02c511c5d25ef0651
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-mdwacme-dev-WIN_AD
                 instance_id: i-07f77faffe82836a2
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-mdwacme-dev-SAS
                 instance_id: i-05e40aa25dedd5cca
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.4.0.0-RH95-Sycamore-acme05-staging-shiny_server_2
                 instance_id: i-0a448a78200edde30
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-shiny_server_4
                 instance_id: i-0c33fb56b54caed5d
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-SAS-WPS-TEST
                 instance_id: i-0a071b2b2d09d4b78
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-R
                 instance_id: i-03baee2d37ab1484a
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-FSA_old_do_not_start
                 instance_id: i-01bea07c559aa0777
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore17-staging-guacamole_server
                 instance_id: i-03539ca30aa887595
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: prodops-smoke-testing
                 instance_id: i-0931da47c0e873ffd
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-shiny_server_1
                 instance_id: i-02ce53b3b956516f1
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-mdwacme-dev-FSA
                 instance_id: i-04243ea7d805cc67b
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-mdwacme-dev-R
                 instance_id: i-09daadd9f9c143a80
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: WDE-4.3.2.5-Syc-mdwacme-dev-guacamole_server
                 instance_id: i-02bd7b9d3448fbe95
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-FSA_new
                 instance_id: i-060cec3592e123c6d
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: syc-syc12-dev-wde-2000-guacamole-b
                 instance_id: i-0e2238e3bea347605
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-shiny_server_3
                 instance_id: i-0e691afbe15bf85b7
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-RHEL10
                 instance_id: i-0a6ec2a7360fdcc6b
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-FSA
                 instance_id: i-05dcd81b2c56aeb00
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-syc15-syc15-new-dev-shiny_server_1
                 instance_id: i-0e356a91c346aaa48
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: wde-2000-ami
                 instance_id: i-0d29e5e0a22873d4e
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
+              - name: SCE-4.3.2.5-syc15-syc15-new-dev-shiny_server_1_samba-testing
+                instance_id: i-0ce715e0a30a165e6
+                region: us-east-1
+                aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2-Syc-SYC15-RH9.6-NEW-dev-shiny_server_3
                 instance_id: i-08193b036a14ce173
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.2.3.5-sycamore-mdwacme-dev-shiny_server_2
                 instance_id: i-01962e9c26750994f
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.4.0.0-Sycamore-acme05-staging-shiny_server_1
                 instance_id: i-0bb00ff40caa97f2b
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.4.0.0-RH95-Sycamore-acme05-staging-shiny_server_1
                 instance_id: i-01dc73b0735f14974
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: Testingserver
                 instance_id: i-052e74d2b88ed25af
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: syc-syc16-dev-wde-2000-guacamole-b
                 instance_id: i-0e42ccb865e53ffe3
                 region: us-east-1
                 aws_profile: dev
-              - name: syc-syc16-dev-wde-2000-windows
-                instance_id: i-07cd431d6dabf0154
-                region: us-east-1
-                aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-shiny_server_2
                 instance_id: i-0d3495459a15f066d
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
+              - name: syc-syc16-dev-wde-2000-windows
+                instance_id: i-04a41c74632c0615d
+                region: us-east-1
+                aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-mdwacme-dev-sFTP
                 instance_id: i-09e7db91adc9851bf
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-mdwacme-dev-WIN_DSK
                 instance_id: i-018344e0ea7eb7eef
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.2.3.5-sycamore-mdwacme-dev-shiny_server_1
                 instance_id: i-030017dfcfd78c8f5
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.4.0.0-Sycamore-acme05-staging-shiny_server_2
                 instance_id: i-0ccf2d6761bbcf8e1
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-sFTP_new
                 instance_id: i-0251b623f56933cee
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: syc-syc12-dev-wde-2000-guacamole-a
                 instance_id: i-074f379732415182e
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore16-dev-WIN_DSK_WDE2.0_Used_For_Upgrade_12Jul2025
                 instance_id: i-0382b0c8bc30fa749
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-WIN_AD
                 instance_id: i-03ea0ebfce5e0d8f1
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-WIN_DSK
                 instance_id: i-079587112b831afce
                 region: us-east-1
                 aws_profile: dev
-              - name: syc-syc16-dev-wde-2000-windows
-                instance_id: i-0a0176dd89ea532a9
-                region: us-east-1
-                aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.3.0-Syc-sycamore15-dev-WIN_2025
                 instance_id: i-011054b2316c4f3da
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: syc-syc16-dev-wde-2000-guacamole-a
                 instance_id: i-095a6092308772537
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-sFTP
                 instance_id: i-093562760085a95c8
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-SAS
                 instance_id: i-0e8c63560fb295b87
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-sycamore18-dev-shiny_server_1
                 instance_id: i-02ca4bc1fec0e10f5
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: WDE-4.3.2.5-Syc-syc18-dev-guacamole_server
                 instance_id: i-0a2699a5415e7fb02
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
+              - name: syc-syc16-dev-wde-2000-windows
+                instance_id: i-0b30be9ae60cd111c
+                region: us-east-1
+                aws_profile: dev
+                state: stopped
+                platform: windows
             STG:
               instances:
               - name: SCE-4.2.3.0-Syc-syracuse-staging-SAS
                 instance_id: i-082deec0617fed81d
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.3.0-Syc-syracuse-staging-sFTP
                 instance_id: i-008e8f3c90e3bee1a
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.3.0-Syc-syracuse-staging-WIN_RDG
                 instance_id: i-0ed38479495dfac8a
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.2.3.0-Syc-syracuse-staging-WIN_AD
                 instance_id: i-0df217ea0ba6511c1
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.2.3.0-Syc-syracuse-staging-FSA
                 instance_id: i-00e56673f4985f650
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.2-Syc-syc12-staging-WIN_AD
                 instance_id: i-00f267ccea8293067
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.2.2.2-Syc-syc12-staging-sFTP-rhel7
                 instance_id: i-09ac324ddf610b1c1
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.2-Syc-syc12-staging-SAS
                 instance_id: i-03427b197e2543d83
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.2-Syc-syc12-staging-FSA-Old-Stopped
                 instance_id: i-09f6fc8cfd6c0d8a0
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.2-Syc-syc12-staging-WIN_RDG
                 instance_id: i-05761394e88112556
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.2.3.0-Syc-syracuse-staging-Execution
                 instance_id: i-093562fff369793db
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-syc12-dev-shiny_server_1
                 instance_id: i-000b6e2f81fc43e06
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.2-Syc-syc12-staging-WIN_RDG-TEMP
                 instance_id: i-080698edacfd00bb1
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-4.3.0.0-Syc-syc12-dev-shiny_server_2
                 instance_id: i-0b3933c641f574b7f
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: SCE-4.3.2.2-sycamore-syracuse-dev-shiny_server_1
                 instance_id: i-0858865e770bc9368
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.0-Syc-syc12-staging-FSA-1-rhel7
                 instance_id: i-047202d53b7497e52
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-syc12-dev-shiny_server_1
                 instance_id: i-0d60478102e1f80e3
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: RHEL9
                 instance_id: i-01216aeca2c91a572
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.2-sycamore-syracuse-dev-shiny_server_2
                 instance_id: i-07cc71b0be60aabc6
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: kannan-automation-test
                 instance_id: i-0adbace4cca35d038
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-5.0.1.0-Syc-springfield3-dev-SAS
                 instance_id: i-0ab8b31cdcad28654
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-5.0.1.0-Syc-springfield3-dev-WIN_AD
                 instance_id: i-04341eaee5c7a1628
                 region: us-east-1
                 aws_profile: dev
-              - name: SCE-4.3.2.5-syc15-syc15-new-dev-shiny_server_1_samba-testing
-                instance_id: i-0ce715e0a30a165e6
-                region: us-east-1
-                aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-5.0.1.0-Syc-springfield3-dev-FSA
                 instance_id: i-01f8ec5c117f1d607
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: SCE-5.0.1.0-Syc-springfield3-dev-R
                 instance_id: i-0bd0ddd9334f70613
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: syc-syc12-dev-wde-2000-windows
                 instance_id: i-0728cd48dd5e8a546
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-5.0.1.0-Syc-springfield3-dev-WIN_DSK
                 instance_id: i-0ab53bed543a07608
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-5.0.1.0-Syc-springfield3-dev-WIN_RDG
                 instance_id: i-029632d0cf47af0d2
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: SCE-5.0.1.0-Syc-springfield3-dev-sFTP
                 instance_id: i-06a3bbdd1675c87b6
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: linux
               - name: Syc12-Migration-Box
                 instance_id: i-09b72b0081c10c0d7
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.3.2.0-Syc-syc12-STG-RHEL9-FSA
                 instance_id: i-083a12ee4e1b86fdd
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
               - name: Syc12-AWS-Managed-AD
                 instance_id: i-08faf296cd033b043
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: windows
               - name: SCE-4.2.2.2-Syc-syc12-STG-RHEL9-sFTP
                 instance_id: i-0f4903898bfc5d183
                 region: us-east-1
                 aws_profile: dev
+                state: running
+                platform: linux
         Unknown:
           environments:
             Unknown:
@@ -530,10 +776,14 @@ AWS_Account_472598590798:
                 instance_id: i-09c5920799a3d490f
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
               - name: New-AD-Entra
                 instance_id: i-09052dbb37d218e80
                 region: us-east-1
                 aws_profile: dev
+                state: stopped
+                platform: windows
     us-east-2:
       customers:
         Sycamore:
@@ -544,6 +794,8 @@ AWS_Account_472598590798:
                 instance_id: i-06dbd40320c216b3f
                 region: us-east-2
                 aws_profile: dev
+                state: stopped
+                platform: linux
 AWS_Account_826859497240:
   aws_profile: prod
   account_id: '826859497240'
@@ -558,182 +810,270 @@ AWS_Account_826859497240:
                 instance_id: i-065211051228e5f33
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: CDR-VAL-CSL-SCE-3.x
                 instance_id: i-05c23c88a341d9c0b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: AD-VAL-CSL-SCE-3.x
                 instance_id: i-08b20b7dce9962073
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: RDG-VAL-CSL-SCE-3.x
                 instance_id: i-05ef9efe89177d347
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: RDG-VAL-CSL-SCE-4.x
                 instance_id: i-099603c845ec9ac7d
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: sFTP-VAL-CSL-SCE-4.x
                 instance_id: i-089b6f144f71c9269
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: CDR-VAL-CSL-SCE-4.x
                 instance_id: i-03f1226191b9b0e1b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ARC-CSL-production-prodtest-DS-agent-instance
                 instance_id: i-0d2b94beff20f9ceb
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: ARC-CSL-production-prodtest-SGW-agent-instance
                 instance_id: i-00ebfc28d2e37eff8
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-2.6.2-CSL-Prod-TEST-ADBOX-Aug-20-2018-DONOTSTOP
                 instance_id: i-076793db0fda4c315
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: ARC-CSLBehring-val-CSLBehring-DS-agent-instance
                 instance_id: i-0ef829d6127b48421
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: ARC-CSLBehring-val-CSLBehring-SGW-agent-instance
                 instance_id: i-0d50ccb04dc60fd35
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: Prodops-Activity
                 instance_id: i-07d7fbabec52603e5
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SAS-VAL-CSL-SCE-3.x
                 instance_id: i-0af6cf96332b1c55b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SAS-VAL-CSL-SCE-4.x-ActiveServer
                 instance_id: i-04e4f56be6767eb4b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: AD-VAL-CSL-SCE-3.x-2022
                 instance_id: i-0f2744b98f95da1db
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.7-csl-cslbehring-val-guacamole_server
                 instance_id: i-07be44b50e9e01267
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
             PROD:
               instances:
               - name: CDR-PRD-CSL-SCE-3.x
                 instance_id: i-06217e340ba72b7ff
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: AD-PRD-CSL-SCE-3.x
                 instance_id: i-0d6b82545e32f5cf5
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: sFTP-PRD-CSL-SCE-3.x
                 instance_id: i-0a81c8263568cc26d
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SAS-PRD-CSL-SCE-3.x
                 instance_id: i-0e252837b8a1036f7
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: ARC-CSLBehring-prod-Production-SGW-agent-instance
                 instance_id: i-05a4cb2f55cfecd31
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ARC-CSLBehring-prod-Production-DS-agent-instance
                 instance_id: i-04ec080eca87fa1c8
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: sFTP-PRD-CSL-SCE-4.x
                 instance_id: i-0e90272483cc0900c
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: RDG-PRD-CSL-SCE-4.x
                 instance_id: i-03220a04f17b3d0ab
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: CDR-PRD-CSL-SCE-4.x
                 instance_id: i-04333f5d71e64b257
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ARC-csl4221-prod-cslbehring-DS-agent-instance
                 instance_id: i-010733bbf6d01d49b
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: ARC-csl4221-prod-cslbehring-SGW-agent-instance
                 instance_id: i-06fd9eb88199b8ad6
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SAS-PRD-CSL-SCE-4.x
                 instance_id: i-04ba85e2ac0200d8a
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: AD-PRD-CSL-SCE-3.x-2022
                 instance_id: i-0571e98fed61adcbb
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.7a-csl-cslbehring-prod-guacamole_server
                 instance_id: i-09dcf48e7e552894c
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SAS-PRD-CSL-SCE-3.x-4-Aug-25
                 instance_id: i-05730ce472b4106c2
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SAS-PRD-CSL-SCE-4.x-test-reserve-1b
                 instance_id: i-018ec14e9e238c945
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: windows
             DEV:
               instances:
               - name: CDR-DEV-CSL-SCE-4.x
                 instance_id: i-09b8735ca10bb226b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: sFTP-DEV-CSL-SCE-4.x
                 instance_id: i-0a5afefe6194f3e4a
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ARC-DEV-CSL-SGW-4.x
                 instance_id: i-0995ab851ad76f54a
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: RDG-DEV-CSL-SCE-4.x
                 instance_id: i-03b2aa1914e6fce95
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: AD-DEV-CSL-SCE-3.x
                 instance_id: i-08389c31b9326eeb7
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: ARC-DEV-CSL-DS-4.x
                 instance_id: i-093f65b7b01e4e224
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: sFTP-DEV-CSL-SCE-3.x
                 instance_id: i-0d8284db2b91a41f5
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: AD-DEV-CSL-SCE-3.x-2022
                 instance_id: i-099642b1ba8a03675
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.7a-csl-cslreview-dev-web-wde
                 instance_id: i-0393eeef716bd26d5
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: CDR-DEV-CSL-SCE-3.x
                 instance_id: i-0110ec7f7bd1280a7
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SAS-DEV-CSL-SCE-4.x-Reinstall-26-May-2025
                 instance_id: i-0f0bc3a18f62ac199
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
         Genmab:
           environments:
             DEV:
@@ -742,158 +1082,234 @@ AWS_Account_826859497240:
                 instance_id: i-03e52741f7935e478
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: CDR-DEV-GENMAB-SCE-4.x
                 instance_id: i-0434a86cb6e9935c2
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: WDE-DEV-GENMAB-SCE-4.x
                 instance_id: i-0ed1d6bcede4dfa7b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.7a-gucamole-DEV-GENMAB-SCE
                 instance_id: i-0565c130023c84dd8
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: GenmabDev-SASLinux
                 instance_id: i-03cf3050f5ce1cd92
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.1.0-genmab-genmabdev-dev-shiny_server_1
                 instance_id: i-009b4de7be14532e3
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: WDE-Genmab-DEV
                 instance_id: i-00ce45785df6c795c
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: RiverbedSteelheadEU1
                 instance_id: i-077f260aa6695e7a5
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabdev-dev-SAS-old
                 instance_id: i-0bf55ffa5366833a3
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabdev-dev-sFTP
                 instance_id: i-0b39381bcdf5cf2a4
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: bastianhost-genmab-dev
                 instance_id: i-0eeacda1b0c3a351b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabdev-dev-FSA
                 instance_id: i-0c1fe6af17969ec61
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabdev-dev-shiny_server_1
                 instance_id: i-086b6ac0b355a2d76
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabdev-dev-SAS
                 instance_id: i-072dcd62278356d1b
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
             VAL:
               instances:
               - name: CDR-VAL-GENMAB-SCE-4.x
                 instance_id: i-0893e061bead882cc
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: sFTP-VAL-GENMAB-SCE-4.x
                 instance_id: i-0c12b8d71f6ae3f96
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: WDE-VAL-GENMAB-SCE-4.x
                 instance_id: i-0d9fc7aafa7a1eca3
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.7a-genmab-genmabval-val-guacamole_server
                 instance_id: i-0baded51c5ac08aa6
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.1.0-genmab-genmabval-val-shiny_server
                 instance_id: i-01b0f948855a5b804
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SAS-LINUX-VAL-GENMAB-SCE-4.x
                 instance_id: i-0014c689df7e4c59e
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabval9-val-FSA
                 instance_id: i-0e2fd8ea770a2dd00
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabval9-val-SAS
                 instance_id: i-0adfa3ac4b21fb2a1
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabval9-val-sFTP
                 instance_id: i-053a293db35ea53d8
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: bastianhost-genmab-val
                 instance_id: i-0084be025a4c7b53a
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabval-val-shiny_server_1
                 instance_id: i-0d5236fcb59b06567
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
             PROD:
               instances:
               - name: CDR-PRD-GENMAB-SCE-4.x
                 instance_id: i-0ae860ac8b6b916d1
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: sFTP-PRD-GENMAB-SCE-4.x
                 instance_id: i-0f619a92d788a0b0e
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: WDE-PRD-GENMAB-SCE-4.x
                 instance_id: i-06c61a9191398ee70
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: RDPTEST-PRD-GENMAB-SCE-4.x
                 instance_id: i-0cbd8218badb4fa94
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SAS-LINUX-PRD-GENMAB-SCE-4.x
                 instance_id: i-0eea315b4962677a4
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.7a-genmab-genmabprod-prod-guacamole_server
                 instance_id: i-032de174e91073155
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: Genmab-Test-windows
                 instance_id: i-0f23e77b049fd53e3
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.1-genmab-genmabprod-prod-shiny_server
                 instance_id: i-0603a5d391f9ab9d2
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabprod9-prod-sFTP
                 instance_id: i-04dae7c2b327d608f
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: bastianhost-genmab-prod
                 instance_id: i-0537580267521cef5
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabprod-prod-shiny_server_1
                 instance_id: i-0d8e60216f4691981
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabprod9-prod-FSA
                 instance_id: i-08c2510d45f3436f4
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-genmab9-genmabprod9-prod-SAS
                 instance_id: i-0474646d7742be4d5
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
         Sycamore:
           environments:
             STG:
@@ -902,20 +1318,28 @@ AWS_Account_826859497240:
                 instance_id: i-094b37c8afbd3b931
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: MDR-1.1.0.0-syca-perf2-test-client
                 instance_id: i-07c3e2ccb0a9fd3e0
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: MDR-1.1.0.0-syca-perf2-test-guacamole_server
                 instance_id: i-0f62c387bf013afc0
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
             DEV:
               instances:
               - name: windows i4i
                 instance_id: i-009a9cc4a3acf2b6b
                 region: eu-central-1
                 aws_profile: prod
+                state: stopped
+                platform: windows
         PMI:
           environments:
             DEV:
@@ -924,106 +1348,156 @@ AWS_Account_826859497240:
                 instance_id: i-0eca81c68ae130fc3
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-deveu-dev-WIN_DSK
                 instance_id: i-0e8cf52723c47131a
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-pmi-deveu-dev-WIN_AD
                 instance_id: i-0f49ea26b4157c409
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-pmi-deveu-dev-guacamole_server
                 instance_id: i-0a6742193d3c6155e
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-deveu-dev-FSA
                 instance_id: i-0dcb7ce55d2053858
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-deveu-dev-SAS
                 instance_id: i-04d9a66a1c76ef58a
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-deveu-dev-shiny_server_1
                 instance_id: i-09d813108ac9af62d
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: PMIDC2
                 instance_id: i-0350a940602faee24
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: PMI-POC-WINDOW-AD
                 instance_id: i-00d58ed53a9a1c1a4
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: Migration Machine
                 instance_id: i-0ed34774b8729c3ca
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: PMI-DEV-MSOffice
                 instance_id: i-01518811efc9dcc02
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
             VAL:
               instances:
               - name: SCE-4.3.2.5-pmi-pmival-val-sFTP
                 instance_id: i-04ccf654952170d2e
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmival-val-FSA
                 instance_id: i-0036c2f3f815d20a8
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmival-val-WIN_AD
                 instance_id: i-0a350f0438b891c4e
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-pmi-pmival-val-guacamole_server
                 instance_id: i-0f6e85ed562c9522d
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmival-val-shiny_server
                 instance_id: i-04503ed94de642ed4
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmival-val-SAS
                 instance_id: i-0f1ae2fb3f6d38cf9
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmival-val-WIN_DSK
                 instance_id: i-0c70309c19dd55fec
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
             PROD:
               instances:
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-WIN_DSK
                 instance_id: i-095987dad3d745fac
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-guacamole_server
                 instance_id: i-06db6eb5609851675
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-SAS
                 instance_id: i-0cb426990357d13ce
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-WIN_AD
                 instance_id: i-02bff832a6b655256
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-FSA
                 instance_id: i-0bfadd9199e538070
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-sFTP
                 instance_id: i-0d39d6fc89a256254
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-pmi-pmiprod-prod-shiny_server
                 instance_id: i-077a34afe7f7ee969
                 region: eu-central-1
                 aws_profile: prod
+                state: running
+                platform: linux
     us-east-1:
       customers:
         Sycamore:
@@ -1034,22 +1508,30 @@ AWS_Account_826859497240:
                 instance_id: i-0f1a3e6b9655524f3
                 region: us-east-1
                 aws_profile: prod
+                state: running
+                platform: linux
             DEV:
               instances:
               - name: AD-Server-2022
                 instance_id: i-0f27d150a1c3ef416
                 region: us-east-1
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SSK-CBA-TEST
                 instance_id: i-0315d5848ea037893
                 region: us-east-1
                 aws_profile: prod
+                state: stopped
+                platform: windows
             POC:
               instances:
               - name: temp-workspaces-vpc
                 instance_id: i-0a5214e89cf65170e
                 region: us-east-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
         Genmab:
           environments:
             DEV:
@@ -1058,14 +1540,20 @@ AWS_Account_826859497240:
                 instance_id: i-002cc3c2fd1324189
                 region: us-east-1
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: AD-Server-GENMAB
                 instance_id: i-09062c7fd7f38de12
                 region: us-east-1
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-genmab9-genmabdev-dev-SAS
                 instance_id: i-0ab77c89a116c8530
                 region: us-east-1
                 aws_profile: prod
+                state: stopped
+                platform: linux
     us-east-2:
       customers:
         Sycamore:
@@ -1076,342 +1564,508 @@ AWS_Account_826859497240:
                 instance_id: i-0010f44e5bde502c0
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-WIN_DSK
                 instance_id: i-053cd18eacb4a4710
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.1-Syc-acme03-prod-WIN_AD
                 instance_id: i-084e91debcd3676f1
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.2.2.1-Syc-acme03-prod-R
                 instance_id: i-02d8f39b1a393bdcf
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-SAS
                 instance_id: i-0c2e85592c2b9fc1c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-FSA
                 instance_id: i-094e2b71d943d0000
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-docker-root-less
                 instance_id: i-00ca012f11699d7ef
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-RShiny-Apps
                 instance_id: i-0ed88e62a50b62374
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-SAS-Linux
                 instance_id: i-0b4a0f93cc7520267
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-Guacamole
                 instance_id: i-0610cd26b159e4ac3
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-Meilisearch
                 instance_id: i-014fc023bf0f197af
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: ARC-Sycamore-production-acme03-DS-agent-instance
                 instance_id: i-08a38994d045a35a4
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: ARC-Sycamore-production-acme03-SGW-agent-instance
                 instance_id: i-0f07eebb7510fc8f7
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-ACME43-SHINY
                 instance_id: i-0adb67ac07290c8ba
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-RShiny-Apps-UbuntuGPU2
                 instance_id: i-0d593a4c12f4246e3
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-RShiny-Apps - UbuntuGPU
                 instance_id: i-0a22f472718ae3e4f
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-guacamole_server
                 instance_id: i-0ac155599740c2e3c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-R
                 instance_id: i-0cd1587bfb3658513
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-FSA
                 instance_id: i-064863f6cdf1593b3
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-WIN_DSK-1
                 instance_id: i-035c80abf47c51e36
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme43-prodtest-shiny_server_3
                 instance_id: i-02de8bee5aa42621e
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: RHEL-IN_PLACE
                 instance_id: i-0fe2ce12a6cc40d55
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.1-Syc-acme03-prod-RShiny-Apps - GPU
                 instance_id: i-0029f404667a33460
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-SAS
                 instance_id: i-089c093886d2f45f6
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-sFTP
                 instance_id: i-03cdae43ee8e376f8
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prod-WIN_RDG
                 instance_id: i-0e440f437a50bcd85
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme43-prod-WIN_AD
                 instance_id: i-0594399f3f742868c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme43-prodtest-shiny_server_2
                 instance_id: i-0bf9a09a0faf074cb
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-ACME43-SAS-WPS
                 instance_id: i-06bbc4cc4e903bd33
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-acme43-prod-shiny-gpu
                 instance_id: i-00a66a09f5703a1f0
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme43-prodtest-shiny_server_1
                 instance_id: i-07d33ccb5da40ea4c
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: My-AD-Test
                 instance_id: i-000507b410abdd391
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme43-prodtest-shiny_server_4
                 instance_id: i-0e030e711bae064a3
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ZFS - Testing
                 instance_id: i-0415cfa50a4c9f1df
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: Test
                 instance_id: i-0646adb245e3b1a81
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: acme03-entra-connect
                 instance_id: i-0b61daf93815705ff
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: WIN-RDWeb-ALBTEST
                 instance_id: i-0a040a0270585e1d8
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
             STG:
               instances:
               - name: SCE-4.2.2.4-Syc-acme04-staging-WIN_DSK
                 instance_id: i-0fafc8f6717caf43d
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme06-staging-FSA
                 instance_id: i-01b4de2605957adc5
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.2.2.4-Syc-acme04-staging-WIN_AD
                 instance_id: i-0770bd90b898b326f
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme06-staging-WIN_RDG
                 instance_id: i-06b5541a32e73e9b1
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme06-staging-R
                 instance_id: i-0d79037c63a8155f9
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme06-staging-sFTP
                 instance_id: i-0742e216373c60eee
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme06-staging-WIN_AD
                 instance_id: i-0826a5fe2da2c3a62
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme06-staging-WIN_DSK
                 instance_id: i-03613bb22a0366109
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.0.0-Syc-acme04-dev-guacamole_server
                 instance_id: i-093850e4af18855c1
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme06-staging-Meilisearch
                 instance_id: i-0a952c2f6b2db5eab
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: RHEL9-Test-Box
                 instance_id: i-02c8a691ba47d5246
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server_1
                 instance_id: i-06a0bc30ee069fe2d
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server_2
                 instance_id: i-00a628213cd0712c3
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server_2_new
                 instance_id: i-03ba304eb8b88bae3
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-Syc-acme06-staging-WIN_1
                 instance_id: i-097444f7fc710b231
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server-automationtest
                 instance_id: i-0da052efeb45bebb3
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server-automationtest-new
                 instance_id: i-08bf2e16c725b2847
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme06-prodtest-shiny_server_1_new
                 instance_id: i-047c51720dc67ad1d
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-acme04-staging-R-RHEL9
                 instance_id: i-0cb5062b4553040d3
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme-staging-shiny_server_3-RHEL9
                 instance_id: i-03851cec0393be5ca
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.0-Syc-acme-staging-shiny_server_4-RHEL9
                 instance_id: i-01dda857d430e0d62
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: RHEL9-Migration-Basion-host
                 instance_id: i-0cb8092ada77e323c
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-acme04-staging-FSA-RHEL9
                 instance_id: i-069065f360086b5fb
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-acme04-staging-SASWPS-RHEL9
                 instance_id: i-058a4cfc35e2f2b9c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-acme04-staging-sFTP-RHEL9
                 instance_id: i-07fd78f3b8794c704
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-syc19-staging-sFTP
                 instance_id: i-05240e95857d991fb
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-syc19-staging-WIN_DSK
                 instance_id: i-02cfb6db2658dedef
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: DSW-4.3.2.5-Syc-syc19-staging-shiny_server_1
                 instance_id: i-080a8a341c9605e2e
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-syc19-staging-WIN_AD
                 instance_id: i-01dadbbbe08eb98ed
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-syc19-staging-SAS
                 instance_id: i-06cae5791398e6f88
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-syc19-staging-FSA
                 instance_id: i-02983c53c2be90a96
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: WDE-4.3.2.5-Syc-syc19-staging-guacamole_server
                 instance_id: i-01735581af5a94082
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: DSW-4.3.2.5-Syc-syc19-staging-shiny_server_2
                 instance_id: i-0cc3ef056082c952a
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
             PERF:
               instances:
               - name: MDR-1.1.0.0-syca-perf1-test-client
                 instance_id: i-0681d56b84cbefa2e
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: MDR-1.1.0.0-syca-perf1-test-guacamole_server
                 instance_id: i-008fa13ad5b7bebbf
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: MDR-1.1.0.0-syca-perf2-test-client
                 instance_id: i-0e94cbc514c9925e9
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: MDR-1.1.0.0-syca-perf3-test-client
                 instance_id: i-0f7667b05a49389d5
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
             DEV:
               instances:
               - name: RHEL9-SSK-DELETE
                 instance_id: i-0fd528d5ce5222654
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
             SAND:
               instances:
               - name: Test-instance-POC01
                 instance_id: i-06b472a2312dd8546
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-poc01-sandbox-sFTP
                 instance_id: i-0345f14488016e51b
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-poc01-sandbox-WIN_DSK
                 instance_id: i-09b3e6e40a9f04228
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-poc01-sandbox-FSA
                 instance_id: i-00aa2a628c05dcd2e
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.3.5-sycamore-POC01-sandbox-shiny_server_2
                 instance_id: i-0c80e8308966524ae
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-poc01-sandbox-WIN_AD
                 instance_id: i-057385e22edef15b9
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: WDE-4.3.2.5-Syc-poc01-sandbox-guacamole_server
                 instance_id: i-0911a93090dcfc82f
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.2.3.5-sycamore-POC01-sandbox-shiny_server_1
                 instance_id: i-0973a3e98d3d52ee4
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
         Daiichi Sankyo:
           environments:
             DEV:
@@ -1420,224 +2074,332 @@ AWS_Account_826859497240:
                 instance_id: i-0b6ba756c8a12fde4
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-Dsi-dsidev-dev-sFTP
                 instance_id: i-05a1a597797e7d937
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-Dsi-dsidev-dev-FSA
                 instance_id: i-0a7f5d6c7e270c42c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-Dsi-dsidev-dev-WIN_DESK
                 instance_id: i-0960465b80ab300c0
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3-X-Dsi-dsidev-dev-guacamole_server
                 instance_id: i-01bf1e8c3de292507
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-Dsi-dsidev-dev-shiny_server_2
                 instance_id: i-007a255a31a997cc1
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-Dsi-dsidev-dev-shiny_server_1
                 instance_id: i-065776d614fec10a2
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-ds-dsi-Common-WIN_AD_1
                 instance_id: i-05351743305f62b82
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3-X-ds-dsi-Common-WIN_AD_2
                 instance_id: i-0ae6c5e5a2b95ac2a
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: ARC-Daiichi-development-dev-SGW-agent-instance
                 instance_id: i-0efc7865eea5c8a85
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ARC-Daiichi-development-dev-DS-agent-instance
                 instance_id: i-0fc756a7dda344113
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3-X-ds-dsi-Proxy-Server-2
                 instance_id: i-030763ebd95a2aab0
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3-X-Dsi-bridge-Server-Updated
                 instance_id: i-0d493e6f37e2c1f3c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: WDE-DSI-DEV-AMI-Pupose
                 instance_id: i-08ff09b692d487c9b
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: dsidev-WIN_AD_Testing
                 instance_id: i-03ca87db284013df2
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3-X-ds-dsi-Proxy-Server-1
                 instance_id: i-04653fa96db0fc923
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: wde-2-dev-ami-purp-dsi
                 instance_id: i-0975770cdf8b9706b
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3-X-Dsi-dsidev-dev-WIN_DESK-roaming
                 instance_id: i-0af838e64ff1de0ee
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3-X-Dsi-dsidev-dev-WIN_DESK-testing-new-AMI-after-wde2.0-creation
                 instance_id: i-01b16d55e6991239e
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.4.0.0-ds-dev-FSA
                 instance_id: i-09dac347eb533be09
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.4.0.0-ds-dev-sFTP
                 instance_id: i-0d1574f11ea131aa8
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.4.0.0-ds-dev-Bastion
                 instance_id: i-0e49ea6dd3e547c7a
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.4.0.0-ds-dev-SAS
                 instance_id: i-073c4bbcdd8e59c23
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: AD_Server_2019_2022_Update_testing
                 instance_id: i-0ab943da9adbe9780
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
             VAL:
               instances:
               - name: SCE-4.3.0.0-ds-dsval-val-sFTP
                 instance_id: i-09144a129b705f1aa
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0-Ds-dsval-val-shiny_server_2
                 instance_id: i-05e0d7712e4cf8cbd
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsval-val-WIN_DSK
                 instance_id: i-08437c3515293c083
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0-Ds-dsval-val-shiny_server_1
                 instance_id: i-0869722cc386e0178
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsval-val-SAS-2
                 instance_id: i-072d77af4b3912c99
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsval-val-FSA
                 instance_id: i-0d6624e5f2ef9cb97
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsval-val-SAS-1
                 instance_id: i-092622784386fccda
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsval-val-guacamole_server
                 instance_id: i-0721bd10deb4debd5
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: ARC-Daiichi-staging-val-DS-agent-instance
                 instance_id: i-0db6118fbc4e7400b
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsval-val-WIN_DSK-2
                 instance_id: i-01279e8d05c15e954
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: ARC-Daiichi-staging-val-SGW-agent-instance
                 instance_id: i-0d7025a4c18b174c3
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
             PROD:
               instances:
               - name: SCE-4.3.0.0-ds-dsprod-prod-shiny_server_2
                 instance_id: i-06e3816d55a2f07ec
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-sFTP
                 instance_id: i-02af3e2e5fdbff556
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-SAS_2
                 instance_id: i-01ef73fc1cbc50b6f
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-SAS_3
                 instance_id: i-0b3eabdc0d1986b9b
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-FSA
                 instance_id: i-0f08aef3eab163adc
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-shiny_server_1
                 instance_id: i-076638603d7bb8562
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-SAS_1
                 instance_id: i-0aa1af2785a766eb6
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-guacamole_server
                 instance_id: i-0a4a1e381e85764a6
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-WIN_DSK
                 instance_id: i-0fab3783545090b86
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: ARC-Daiichi-production-dsprod-DS-agent-instance
                 instance_id: i-07a28db2cfffbb169
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-WIN_DSK_RDP2
                 instance_id: i-02eeec101cb6c8e18
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: ARC-Daiichi-production-dsprod-SGW-agent-instance
                 instance_id: i-0ab12928c2eb6b838
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.0.0-ds-dsprod-prod-WIN_DSK_custom_software
                 instance_id: i-036e74c1819ab4bb0
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.0.0-ds-dsprod-prod-WIN_DSK_RDP1
                 instance_id: i-01d7b6732d9856a77
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.0.0-ds-dsprod-prod-WIN_DSK_RDP3
                 instance_id: i-0e3beb2fe70d4151c
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
             dev:
               instances:
               - name: dsi-dsidev-dev-wde-2000-windows
                 instance_id: i-0f0a280157d57e56c
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: dsi-dsidev-dev-wde-2000-guacamole-a
                 instance_id: i-0ee6974587312a58b
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: dsi-dsidev-dev-wde-2000-guacamole-b
                 instance_id: i-07a5e92ee3ac75c42
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: dsi-dsidev-dev-wde-2000-windows
                 instance_id: i-013cca46d76987836
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
         CSL Behring:
           environments:
             DEV:
@@ -1646,14 +2408,20 @@ AWS_Account_826859497240:
                 instance_id: i-0dd4ea9d142fb38eb
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: My-TEST-TGW
                 instance_id: i-012889531ba128330
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: csl-dev-wde-us2
                 instance_id: i-08eb59d1f2b44db94
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
         Ephicacy:
           environments:
             PROD:
@@ -1662,34 +2430,50 @@ AWS_Account_826859497240:
                 instance_id: i-089404e03c5007ce7
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-FSA
                 instance_id: i-083df2e12dc55b8fb
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-sFTP
                 instance_id: i-0f01bae411a275d5d
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-guacamole_server
                 instance_id: i-0cd562b319373d144
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-R
                 instance_id: i-0695f647e77a28030
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-WIN_AD
                 instance_id: i-028edee7d6df46152
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-WIN_DSK
                 instance_id: i-0865ca6a1ba6b3817
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.1.0-ephicacy-ephtrg-prod-SAS-RHEL9
                 instance_id: i-0a29961b5d45ff5ed
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
         Genmab:
           environments:
             PROD:
@@ -1698,84 +2482,130 @@ AWS_Account_826859497240:
                 instance_id: i-049f906ef08c1fa4c
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: RDG-Genmab-NEW
                 instance_id: i-01770a38635374543
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: Genmab-RDG-US
                 instance_id: i-081c983cf736f37da
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: Stunnel-Genmab-prod
                 instance_id: i-0e5736b07e781dbd9
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: Genmab-PROD-WDE-US
                 instance_id: i-0a3e2451a7e84991b
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: Genmab-PROD-HA-PROXY
                 instance_id: i-0f7e3bc462e2ca9b0
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
             DEV:
               instances:
               - name: WDE-GENMAB-RDP-US-DEV
                 instance_id: i-0931216a1ec4a446c
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: WDE-Test-genmab-server-dev-ADJ
                 instance_id: i-0e75899390ff7249a
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: WDE-GENMAB-US2-PUB-ADJ
                 instance_id: i-061df38db1117e108
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: Test-genmab-server-dev
                 instance_id: i-09db341fdba206bfd
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: WDE-GENMAB-US2-PUB
                 instance_id: i-0a5009bdc0eed49b9
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: WDE-DEV-GENMAB-SCE-Guacamole-US
                 instance_id: i-091ec0eb12797c309
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: WDE-Test-genmab-server-dev
                 instance_id: i-050fdb09f3261393b
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: Genmab-SAS-DEV-US
                 instance_id: i-04977c515b9b49a7f
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: MetaSASServer-US-DEV
                 instance_id: i-08c808cdfed13f2a4
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: RiverbedSteelheadUS2
                 instance_id: i-0832ad84addc3afcc
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: RDG-GMAB-DEV-US2
                 instance_id: i-06a8efa94650c1cfa
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: RDG-US-DEV-Genmab
                 instance_id: i-08942ce66746f5321
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: RiverbedSteelheadUS2
                 instance_id: i-0f8a9b008d6ecd9bf
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
+              - name: Test-SAS-Server-WG-u8
+                instance_id: i-084d38413deb43308
+                region: us-east-2
+                aws_profile: prod
+                state: stopped
+                platform: linux
               - name: genmab-sas-sso-test
                 instance_id: i-0bdb186ea1877cb14
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
         Vertex:
           environments:
             SAND:
@@ -1784,51 +2614,77 @@ AWS_Account_826859497240:
                 instance_id: i-044651fdf54820af8
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-vertexsbx-sandbox-sFTP
                 instance_id: i-018568cda40b34bbd
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-Syc-vertexsbx-sandbox-WIN_SAS
                 instance_id: i-0f52f72a584beec52
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: SCE-4.3.2.5-Syc-vertexsbx-sandbox-R
                 instance_id: i-0cd3c740008ca1510
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: linux
               - name: SCE-4.3.2.5-Syc-vertexsbx-sandbox-FSA
                 instance_id: i-01704fc1588ca8944
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: WDE-4.3.2.5-Syc-vertexsbx-sandbox-guacamole_server
                 instance_id: i-00e6af787f1ec1966
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-vertex-vertextsbx-dev-shiny_server_1
                 instance_id: i-015c78a59646f2fe6
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: Vertex-RDWeb
                 instance_id: i-0dee88ff76b0f7af2
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: Vertex-RDWeb01
                 instance_id: i-049e32c64519928a5
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: SCE-4.3.2.5-Syc-vertexsbx-sandbox-WIN_SAS_test
                 instance_id: i-0512152c6a1094e71
                 region: us-east-2
                 aws_profile: prod
+                state: stopped
+                platform: windows
               - name: Vertex-OKTA-ADConnect
                 instance_id: i-0b5045d528979b885
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: windows
               - name: okta-asa-gateway9.5
                 instance_id: i-05f136912a26736f2
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
               - name: SCE-4.3.2.5-vertex-vertextsbx-dev-shiny_server_2
                 instance_id: i-0878c6f91c8f2550d
                 region: us-east-2
                 aws_profile: prod
+                state: running
+                platform: linux
